@@ -1,0 +1,33 @@
+.bg-grey {
+    background-color: #f2f2f2;
+}
+
+.logo-white {
+    width: 75%;
+}
+
+.f-28 { font-size: 28px; }
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-30 {
+    margin-bottom: 30px !important;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+
+.mtb10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
