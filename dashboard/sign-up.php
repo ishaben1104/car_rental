@@ -4,30 +4,7 @@
 <?php
 include 'include/header-links.php';
 include '../config/connection.php';
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //Retrieve form data
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $username = $_POST["uname"];
-    $password = SHA1($_POST["password"]);
-    //$password = $_POST["password"];
 
-    //SQL query to inser data into the database
-    $sql = "INSERT INTO `user_register`(`full_name`, `email`, `username`, `password`) 
-        VALUES ('$name', '$email', '$username', '$password')";
-
-    //Execute the query
-    if ($conn->query($sql) === TRUE) {
-        echo '<script>';
-        header('Location:sign-in.php');
-        // echo 'document.addEventListener("DOMContentLoader"), function() {';
-        // echo 'document.getElementById("SuccessModal").style.display = "block";';
-        // echo '});';
-        echo '</script>';
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Retrieve form data
     $name = $_POST["name"];
@@ -67,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="nk-main ">
             <div class="nk-wrap nk-wrap-nosidebar">
                 <div class="nk-content ">
-                    <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+                    <div class="nk-block nk-block-middle nk-auth-body wide-sm">
                         <div class="brand-logo pb-4 text-center">
                             <a href="dashboard.php" class="logo-link">
                                 <img class="logo-img" src="assets/images/logo-blue.png" alt="logo">
@@ -81,93 +58,111 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </div>
                                 </div>
                                 <form method="post">
-                                    <div class="row">
+                                    <div class="row g-gs">
                                         <!-- Full name -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="name">Full Name</label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="name">Full Name</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Email -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="email">Email address</label>
-                                            <div class="form-control-wrap">
-                                                <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mail"></em>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="email">Email address</label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-icon form-icon-right">
+                                                        <em class="icon ni ni-mail"></em>
+                                                    </div>
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                                                 </div>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                                             </div>
                                         </div>
                                         <!-- Contact no. -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="phone">Contact No.</label>
-                                            <div class="form-control-wrap">
-                                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="1234567890" pattern="[0-9]{10,11}" required>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="phone">Contact No.</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="1234567890" pattern="[0-9]{10,11}" required>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Zip code -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="code">Zipcode</label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control" id="code" name="code" placeholder="Enter your zipcode" pattern="[a-zA-Z0-9\s]{6,7}" required>
-                                            </div>
-                                        </div>
-                                        <!-- Gender -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="gender">Gender</label>
-                                            <div class="form-control-wrap">
-                                                <ul class="custom-control-group">
-                                                    <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" name="gender" value="male" id="sex-male" required>
-                                                            <label class="custom-control-label" for="sex-male">Male</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" name="gender" value="female" id="sex-female" checked required>
-                                                            <label class="custom-control-label" for="sex-female">Female</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" name="gender" value="other" id="sex-other" required>
-                                                            <label class="custom-control-label" for="sex-other">Others</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="code">Zipcode</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="code" name="code" placeholder="Enter your zipcode" pattern="[a-zA-Z0-9\s]{6,7}" required>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Address -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="address">Address</label>
-                                            <div class="form-control-wrap">
-                                                <textarea class="form-control form-control-sm" id="address" name="address" placeholder="Enter your address here" required></textarea>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="address">Address</label>
+                                                <div class="form-control-wrap">
+                                                    <textarea class="form-control form-control-sm" id="address" name="address" placeholder="Enter your address here" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Gender -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="gender">Gender</label>
+                                                <div class="form-control-wrap">
+                                                    <ul class="custom-control-group">
+                                                        <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" class="custom-control-input" name="gender" value="male" id="sex-male" required>
+                                                                <label class="custom-control-label" for="sex-male">Male</label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" class="custom-control-input" name="gender" value="female" id="sex-female" checked required>
+                                                                <label class="custom-control-label" for="sex-female">Female</label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" class="custom-control-input" name="gender" value="other" id="sex-other" required>
+                                                                <label class="custom-control-label" for="sex-other">Others</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Username -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="uname">Username</label>
-                                            <div class="form-control-wrap">
-                                                <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-user"></em>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="uname">Username</label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-icon form-icon-right">
+                                                        <em class="icon ni ni-user"></em>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter your username" required>
                                                 </div>
-                                                <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter your username" required>
                                             </div>
                                         </div>
                                         <!-- Password -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="password">Password</label>
-                                            <div class="form-control-wrap">
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="password">Password</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Confirm Password -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="conpassword">Confirm Password</label>
-                                            <div class="form-control-wrap">
-                                                <input type="password" class="form-control" id="conpassword" name="conpassword" placeholder="Re-enter your password" required title="Both password should match" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="conpassword">Confirm Password</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="password" class="form-control" id="conpassword" name="conpassword" placeholder="Re-enter your password" required title="Both password should match" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">

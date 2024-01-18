@@ -3598,6 +3598,7 @@ table .badge {
 .login-wrapper .loginbox .login-auth {
   padding: 2rem;
   width: 635px;
+  background-color: #f1efef;
 }
 @media (max-width: 320px) {
   .login-wrapper .loginbox .login-auth {

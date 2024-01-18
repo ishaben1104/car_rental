@@ -1,3 +1,9 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+include 'config/connection.php';
+include 'include/session.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>Dreams Rent</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="shortcut icon" href="assets/img/favicon.png">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
@@ -66,14 +73,30 @@
                             </ul>
                         </li>
                     </ul> -->
-                    <ul class="nav header-navbar-rht">
-                        <li class="nav-item">
-                            <a class="nav-link header-login" href="login.php"><span><i class="fa-regular fa-user"></i></span>Sign In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link header-reg" href="register.php"><span><i class="fa-solid fa-lock"></i></span>Sign Up</a>
-                        </li>
-                    </ul>
+                    <?php if(!isset($_SESSION['driver_id'])) {?>
+                        <ul class="nav header-navbar-rht">
+                            <li class="nav-item">
+                                <a class="nav-link header-login" href="login.php"><span><i class="fa-regular fa-user"></i></span>Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link header-reg" href="register.php"><span><i class="fa-solid fa-lock"></i></span>Sign Up</a>
+                            </li>
+                        </ul>
+                    <?php } else { ?>
+                        <ul class="nav header-navbar-rht">
+                            <li class="nav-item dropdown">
+                                <label class="welcome-user cursor-pointer" for="dropdown-toggle">
+                                    <span><i class="fa-solid fa-circle-user fa-fw align-middle f-28"></i></span>Welcome <?php echo $_SESSION['fullname']; ?> <i class="fas fa-angle-down align-middle ml-10"></i>
+                                </label>
+                                <input type="checkbox" id="dropdown-toggle" class="toggle-input">
+                                <ul class="submenu">
+                                    <li><a href="my-account.php">My Profile</a></li>
+                                    <li><a href="booking.php">My Bookings</a></li>
+                                    <li><a href="logout.php">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <?php } ?>
                 </nav>
             </div>
         </header>
@@ -113,7 +136,7 @@
                                 <div class="form-group">
                                     <label>Pickup Location</label>
                                     <div class="group-img">
-                                        <input type="text" class="form-control" placeholder="Enter City, Airport, or Address">
+                                        <input type="text" class="form-control" id="pickup_city" name="pickup_city" placeholder="Enter City, Airport, or Address">
                                         <span><i class="feather-map-pin"></i></span>
                                     </div>
                                 </div>
@@ -125,13 +148,13 @@
                                 <div class="form-group-wrapp">
                                     <div class="form-group date-widget">
                                         <div class="group-img">
-                                            <input type="text" class="form-control datetimepicker" placeholder="04/11/2023">
+                                            <input type="text" class="form-control datetimepicker" name="pickup_date" placeholder="04/11/2023">
                                             <span><i class="feather-calendar"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-group time-widge">
                                         <div class="group-img">
-                                            <input type="text" class="form-control timepicker" placeholder="11:00 AM">
+                                            <input type="text" class="form-control timepicker" name="pickup_time" placeholder="11:00 AM">
                                             <span><i class="feather-clock"></i></span>
                                         </div>
                                     </div>
@@ -141,7 +164,7 @@
                                 <div class="form-group">
                                     <label>Drop off Location</label>
                                     <div class="group-img">
-                                        <input type="text" class="form-control" placeholder="Enter City, Airport, or Address">
+                                        <input type="text" class="form-control" id="dropoff_city" name="dropoff_city" placeholder="Enter City, Airport, or Address">
                                         <span><i class="feather-map-pin"></i></span>
                                     </div>
                                 </div>
@@ -153,13 +176,13 @@
                                 <div class="form-group-wrapp">
                                     <div class="form-group date-widge">
                                         <div class="group-img">
-                                            <input type="text" class="form-control datetimepicker" placeholder="04/11/2023">
+                                            <input type="text" class="form-control datetimepicker" name="dropoff_date" placeholder="04/11/2023">
                                             <span><i class="feather-calendar"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-group time-widge">
                                         <div class="group-img">
-                                            <input type="text" class="form-control timepicker" placeholder="11:00 AM">
+                                            <input type="text" class="form-control timepicker" name="dropoff_time" placeholder="11:00 AM">
                                             <span><i class="feather-clock"></i></span>
                                         </div>
                                     </div>
@@ -168,7 +191,7 @@
                         </ul>
                         <div class="form-group">
                             <div class="search-btn text-center">
-                                <button class="btn search-button" type="submit"> <i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                                <button class="btn search-button" type="submit" name="bookCar"> <i class="fa fa-search" aria-hidden="true"></i>Search</button>
                             </div>
                         </div>
                     </form>
@@ -1040,61 +1063,22 @@
                 <div class="row">
                     <div class="popular-slider-group">
                         <div class="owl-carousel popular-cartype-slider owl-theme">
-
-                            <div class="listing-owl-item">
-                                <div class="listing-owl-group">
-                                    <div class="listing-owl-img">
-                                        <img src="assets/img/cars/mp-vehicle-01.png" class="img-fluid" alt="Popular Cartypes">
+                            <?php
+                                # Prepare the SELECT Query
+                                $sqlCategory = "SELECT *, (SELECT COUNT(car_id) FROM car_details WHERE car_details.category_id = car_category.category_id GROUP BY category_id) AS car_count FROM car_category";
+                                $result = $conn->query($sqlCategory);
+                                while ($row = $result->fetch_assoc()) {
+                            ?>
+                                <div class="listing-owl-item">
+                                    <div class="listing-owl-group">
+                                        <div class="listing-owl-img">
+                                            <img src="assets/img/cars/mp-vehicle-01.png" class="img-fluid" alt="Popular Cartypes">
+                                        </div>
+                                        <h6><?php echo $row['category_name']; ?></h6>
+                                        <p><?php echo isset($row['car_count']) ? $row['car_count'] : '0' ?> Cars</p>
                                     </div>
-                                    <h6>Crossover</h6>
-                                    <p>35 Cars</p>
                                 </div>
-                            </div>
-
-
-                            <div class="listing-owl-item">
-                                <div class="listing-owl-group">
-                                    <div class="listing-owl-img">
-                                        <img src="assets/img/cars/mp-vehicle-02.png" class="img-fluid" alt="Popular Cartypes">
-                                    </div>
-                                    <h6>Sports Coupe</h6>
-                                    <p>45 Cars</p>
-                                </div>
-                            </div>
-
-
-                            <div class="listing-owl-item">
-                                <div class="listing-owl-group">
-                                    <div class="listing-owl-img">
-                                        <img src="assets/img/cars/mp-vehicle-03.png" class="img-fluid" alt="Popular Cartypes">
-                                    </div>
-                                    <h6>Sedan</h6>
-                                    <p>15 Cars</p>
-                                </div>
-                            </div>
-
-
-                            <div class="listing-owl-item">
-                                <div class="listing-owl-group">
-                                    <div class="listing-owl-img">
-                                        <img src="assets/img/cars/mp-vehicle-04.png" class="img-fluid" alt="Popular Cartypes">
-                                    </div>
-                                    <h6>Pickup</h6>
-                                    <p>17 Cars</p>
-                                </div>
-                            </div>
-
-
-                            <div class="listing-owl-item">
-                                <div class="listing-owl-group">
-                                    <div class="listing-owl-img">
-                                        <img src="assets/img/cars/mp-vehicle-05.png" class="img-fluid" alt="Popular Cartypes">
-                                    </div>
-                                    <h6>Family MPV</h6>
-                                    <p>24 Cars</p>
-                                </div>
-                            </div>
-
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -1143,7 +1127,7 @@
                                     </div>
                                     <div class="count-content">
                                         <h4><span class="counterUp">20</span>K+</h4>
-                                        <p>Completed Orders</p>
+                                        <p>Completed Bookings</p>
                                     </div>
                                 </div>
                             </div>
@@ -1594,6 +1578,30 @@
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="assets/js/owl.carousel.min.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(document).on('keyup','#pickup_city',function(){
+            $( "#pickup_city" ).autocomplete({
+                source:function(request,response){
+                    $.post("autocomplete.php",{'name':$( "#pickup_city" ).val()}).done(function(data, status){
+
+                        response(JSON.parse(data));
+                    });
+                }
+            });
+        });
+
+        $(document).on('keyup','#dropoff_city',function(){
+            $( "#dropoff_city" ).autocomplete({
+                source:function(request,response){
+                    $.post("autocomplete.php",{'name':$( "#dropoff_city" ).val()}).done(function(data, status){
+
+                        response(JSON.parse(data));
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

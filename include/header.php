@@ -30,27 +30,30 @@
                     <li><a href="contact-us.php">Contact Us</a></li>
                 </ul>
             </div>
-            <ul class="nav header-navbar-rht">
-                <li class="nav-item dropdown">
-                    <label class="welcome-user cursor-pointer" for="dropdown-toggle">
-                        <span><i class="fa-solid fa-circle-user fa-fw align-middle f-28"></i></span>Welcome User <i class="fas fa-angle-down align-middle ml-10"></i>
-                    </label>
-                    <input type="checkbox" id="dropdown-toggle" class="toggle-input">
-                    <ul class="submenu">
-                        <li><a href="invoice-details.php">My Profile</a></li>
-                        <li><a href="invoice-details.php">My Bookings</a></li>
-                        <li><a href="invoice-details.php">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- <ul class="nav header-navbar-rht">
-                <li class="nav-item">
-                    <a class="nav-link header-login" href="login.php"><span><i class="fa-regular fa-user"></i></span>Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link header-reg" href="register.php"><span><i class="fa-solid fa-lock"></i></span>Sign Up</a>
-                </li>
-            </ul> -->
+            <?php if(!isset($_SESSION['driver_id'])) {?>
+                <ul class="nav header-navbar-rht">
+                    <li class="nav-item">
+                        <a class="nav-link header-login" href="login.php"><span><i class="fa-regular fa-user"></i></span>Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link header-reg" href="register.php"><span><i class="fa-solid fa-lock"></i></span>Sign Up</a>
+                    </li>
+                </ul>
+            <?php } else { ?>
+                <ul class="nav header-navbar-rht">
+                    <li class="nav-item dropdown">
+                        <label class="welcome-user cursor-pointer" for="dropdown-toggle">
+                            <span><i class="fa-solid fa-circle-user fa-fw align-middle f-28"></i></span>Welcome <?php echo $_SESSION['fullname']; ?> <i class="fas fa-angle-down align-middle ml-10"></i>
+                        </label>
+                        <input type="checkbox" id="dropdown-toggle" class="toggle-input">
+                        <ul class="submenu">
+                            <li><a href="my-account.php">My Profile</a></li>
+                            <li><a href="booking.php">My Bookings</a></li>
+                            <li><a href="logout.php">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            <?php } ?>
         </nav>
     </div>
 </header>

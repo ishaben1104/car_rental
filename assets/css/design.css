@@ -40,7 +40,8 @@
 }
 
 /* Show the dropdown content when checkbox is checked */
-.toggle-input:checked+.submenu, .toggle-input:focus + .submenu {
+.toggle-input:checked+.submenu,
+.toggle-input:focus+.submenu {
     display: block;
     visibility: visible;
     opacity: 1;
@@ -69,4 +70,72 @@
 /* Change color on hover for dropdown items */
 .submenu li a:hover {
     background-color: #ddd;
+}
+
+/* numbers bg */
+
+.my-account .user-img img {
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px dashed #201f1d;
+}
+
+.my-account .nav-pills .nav-link {
+    color: #201F1D;
+    font-weight: 500;
+}
+
+.my-account .nav-pills .nav-link.active {
+    background-color: #fe9307;
+    color: #fff;
+    ;
+}
+
+.dashboard {
+    background: #fe9307;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.dashboard .count-group {
+    position: relative;
+    width: 100%;
+    display: flex;
+    top: 0;
+    background-image: url(../img/bg/count-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    border-radius: 10px;
+    padding: 20px;
+    -webkit-transition: 500ms all ease;
+    -o-transition: 500ms all ease;
+    transition: 500ms all ease;
+    -moz-transition: 500ms all ease;
+    -ms-transition: 500ms all ease;
+}
+
+.dashboard .black-bg {
+    padding: 24px;
+    background: #201F1D;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: 0 20px 0 0;
+    -webkit-transition: 500ms all ease;
+    -o-transition: 500ms all ease;
+    transition: 500ms all ease;
+    -moz-transition: 500ms all ease;
+    -ms-transition: 500ms all ease;
+}
+
+.my-account .table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.my-account table .badge {
+    min-width: 83px;
 }

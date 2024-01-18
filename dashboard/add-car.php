@@ -14,6 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $vehicleModel = $_POST["vehicleModel"];
     $color = $_POST["color"];
     $mileage = $_POST["mileage"];
+    $transmission = $_POST["transmission"];
+    $fuelType = $_POST["fuelType"];
+
+    $perHourRate = $_POST["perHourRate"];
+    $location = $_POST["location"];
+
     $alarmType = $_POST["alarmType"];
     $category = $_POST["category"];
     $noofseats = $_POST["noofseats"];
@@ -21,14 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //File Upload
     $customFile = $_FILES["customFile"]["name"];
     $tempname = $_FILES["customFile"]["tmp_name"];
-    $folder = "assets/images/car/".basename($_FILES["customFile"]["name"]);
+    $folder = "assets/images/car/" . basename($_FILES["customFile"]["name"]);
 
     //SQL query to inser data into the database
-    $sql = "INSERT INTO `car_details`(`owner_id`, `registeration_no`, `car_name`,`brand_id`, `side_windows`, `vehicle_idno`, `vehicle_year`, `vehicle_make`, `vehicle_model`, `color`, `mileage`, `alarm_type`, `category_id`, `noofseats`, `comments`,`image`) 
-    VALUES ('$name', '$regNo', '$carName','$brand', '$sideWindows', '$vidno', '$vehicleYear', '$vehicleMake', '$vehicleModel', '$color','$mileage','$alarmType','$category','$noofseats','$comments','$customFile')";
+    $sql = "INSERT INTO `car_details`(`owner_id`, `registeration_no`, `car_name`,`brand_id`, `side_windows`, `vehicle_idno`, `vehicle_year`, `vehicle_make`, `vehicle_model`, `color`, `mileage`, `transmission`, `fuelType`, `alarm_type`, `category_id`, `noofseats`, `comments`,`image`,`per_hour_rate`,`location`) 
+    VALUES ('$name', '$regNo', '$carName','$brand', '$sideWindows', '$vidno', '$vehicleYear', '$vehicleMake', '$vehicleModel', '$color','$mileage','$transmission','$fuelType','$alarmType','$category','$noofseats','$comments','$customFile','$perHourRate','$location')";
 
     //Execute the query
-    if ($conn->query($sql) === TRUE && move_uploaded_file($tempname,$folder)) {
+    if ($conn->query($sql) === TRUE && move_uploaded_file($tempname, $folder)) {
         echo "<h3>Car Added Successfully!</h3>";
         echo "<script> location.href='car-list.php'; </script>";
     } else {
@@ -40,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <?php
 include 'include/header-links.php';
 include 'include/session.php';
@@ -120,9 +126,9 @@ include 'include/session.php';
 
                                                                 if ($result->num_rows > 0) {
                                                                     while ($row = $result->fetch_assoc()) {
-                                                                        ?>
+                                                                ?>
                                                                         <option value="<?php echo $row["brand_id"]; ?>"><?php echo $row["brand_name"]; ?></option>
-                                                                        <?php
+                                                                <?php
                                                                     }
                                                                 }
                                                                 ?>
@@ -214,6 +220,62 @@ include 'include/session.php';
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!-- Car Transmission -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="transmission">Transmission</label>
+                                                        <div class="form-control-wrap">
+                                                            <ul class="custom-control-group">
+                                                                <li>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" class="custom-control-input" name="transmission" value="auto" id="auto" checked required>
+                                                                        <label class="custom-control-label" for="auto">Auto</label>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" class="custom-control-input" name="transmission" value="manual" id="manual" required>
+                                                                        <label class="custom-control-label" for="manual">Manual</label>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Fuel Type -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="fuelType">Fuel Type</label>
+                                                        <div class="form-control-wrap">
+                                                            <ul class="custom-control-group">
+                                                                <li>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" class="custom-control-input" name="fuelType" value="petrol" id="petrol" checked required>
+                                                                        <label class="custom-control-label" for="petrol">Petrol</label>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" class="custom-control-input" name="fuelType" value="diesel" id="diesel" required>
+                                                                        <label class="custom-control-label" for="diesel">Diesel</label>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" class="custom-control-input" name="fuelType" value="electric" id="electric" required>
+                                                                        <label class="custom-control-label" for="electric">Electric</label>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" class="custom-control-input" name="fuelType" value="hybrid" id="hybrid" required>
+                                                                        <label class="custom-control-label" for="hybrid">Hybrid</label>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!-- Alarm Type -->
                                                 <div class="col-md-4">
                                                     <div class="form-group">
@@ -231,7 +293,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                 <!-- Category -->
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="form-label" for="category">Category</label>
                                                         <div class="form-control-wrap ">
@@ -254,7 +316,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                 <!-- Number of seats -->
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="form-label" for="noofseats">Number of seats</label>
                                                         <div class="form-control-wrap">
@@ -271,6 +333,27 @@ include 'include/session.php';
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!-- Comments -->
+                                                <!-- Location -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="location">Location</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" id="location" name="location" placeholder="Romford" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Per Hour Rate -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="perHourRate">Per Hour Rate</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="number" class="form-control" id="perHourRate" name="perHourRate" placeholder="5" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Comments -->
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-lg btn-primary">Add Car</button>
@@ -297,6 +380,20 @@ include 'include/session.php';
     <?php
     include 'include/footer-scripts.php';
     ?>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(document).on('keyup','#location',function(){
+            $( "#location" ).autocomplete({
+                source:function(request,response){
+                    $.post("autocomplete.php",{'name':$( "#location" ).val()}).done(function(data, status){
+
+                        response(JSON.parse(data));
+                    });
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>

@@ -1,6 +1,9 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors',1);
 include 'config/connection.php';
+
 
 // Check if user is logged in
 if (isset($_SESSION['username']) != "") {
@@ -19,13 +22,18 @@ if (isset($_POST['login'])) {
     if ($result->num_rows > 0) {
         // Output data of the first (and only) row
         $row = $result->fetch_assoc();
-        if ($row['role_type'] == "admin" || $row['role_type'] == "owner") {
+        $user_id = $row['user_id'];
+        $getDriverSql = "SELECT * FROM `drivers` WHERE user_id = '$user_id'";
+        $getDriverResult = $conn->query($getDriverSql);
+        $rowDriver = $getDriverResult->fetch_assoc();
+        if ($row['role_type'] == "driver") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['fullname'] = $row['full_name'];
             $_SESSION['roletype'] = $row['role_type'];
-            header("Location:dashboard.php");
-        } else if ($row['role_type'] == "driver") {
-            //header("Location:frontend/index.php");
+            $_SESSION['driver_id'] = $rowDriver['driver_id'];
+            echo "<h3>Login Successful!</h3>";
+            echo "<script> location.href = 'index.php'; </script>";
+        } else {
             echo 'No records found';
         }
     } else {
@@ -51,10 +59,10 @@ include 'include/header-links.php';
             <div class="loginbox">
                 <div class="login-auth">
                     <div class="login-auth-wrap">
-                        <!-- <div class="sign-group">
+                        <div class="sign-group">
                             <a href="index.php" class="btn sign-up"><span><i class="fe feather-corner-down-left" aria-hidden="true"></i></span> Back To Home</a>
-                        </div> -->
-                        <h1>Sign In</h1>
+                        </div>
+                        <h1 class="mb-40">Sign In</h1>
                         <!-- <p class="account-subtitle">We'll send a confirmation code to your email.</p> -->
                         <form method="post">
                             <div class="form-group">
@@ -64,7 +72,7 @@ include 'include/header-links.php';
                             <div class="form-group">
                                 <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
                                 <div class="pass-group">
-                                    <input type="password" class="form-control pass-input" placeholder>
+                                    <input type="password" id="password" name="password" class="form-control pass-input" placeholder>
                                     <span class="fas fa-eye toggle-password"></span>
                                 </div>
                             </div>
@@ -77,7 +85,7 @@ include 'include/header-links.php';
                                     <span class="checkmark"></span>
                                 </label>
                             </div> -->
-                            <a href="index.php" class="btn btn-outline-light w-100 btn-size mt-1">Sign In</a>
+                            <button type="submit" name="login" class="btn btn-outline-light w-100 btn-size mt-1">Sign In</button>
                             <div class="text-center dont-have">Don't have an account yet? <a href="register.php">Register</a></div>
                         </form>
                     </div>

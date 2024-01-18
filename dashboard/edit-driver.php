@@ -90,7 +90,7 @@ include 'include/session.php';
                                         <form method="post">
                                             <div class="row g-gs">
                                                 <!-- Full name -->
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label class="form-label" for="name">Full Name</label>
                                                         <div class="form-control-wrap">
@@ -99,7 +99,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                 <!-- Email -->
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label class="form-label" for="email">Email address</label>
                                                         <div class="form-control-wrap">
@@ -111,7 +111,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                 <!-- Contact no. -->
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label class="form-label" for="phone">Contact No.</label>
                                                         <div class="form-control-wrap">
@@ -120,7 +120,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                 <!-- Zip code -->
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label class="form-label" for="code">Zipcode</label>
                                                         <div class="form-control-wrap">

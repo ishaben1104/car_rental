@@ -115,6 +115,7 @@ include 'include/session.php';
                                                         <label class="form-label" for="dlno">Driving License Number</label>
                                                         <div class="form-control-wrap">
                                                             <input type="text" class="form-control" id="dlno" name="dlno" placeholder="Enter your driving license number" pattern="[A-Z]{5}[0-9]{6}[A-Z]{2}[0-9]{1}[A-Z]{2}\s[0-9]{2}" required>
+                                                            <span class="f-12">e.g. FARME100165AB5EW </span>
                                                         </div>
                                                     </div>
                                                 </div>

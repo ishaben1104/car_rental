@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/plugins/aos/aos.css">
     <link rel="stylesheet" href="assets/css/feather.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/design.css">
     <link rel="stylesheet" href="common-class.css">

@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+include 'include/session.php';
 include 'config/connection.php';
 ?>
 <!DOCTYPE html>
@@ -24,66 +27,6 @@ include 'include/header-links.php';
             </div>
         </div>
     </div>
-
-    <div class="sortby-sec">
-        <div class="container">
-            <div class="sorting-div">
-                <div class="row d-flex align-items-center">
-                    <div class="col-xl-4 col-lg-3 col-sm-12 col-12">
-                        <div class="count-search">
-                            <p>Showing <span>1-8</span> of 10 Results</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-9 col-sm-12 col-12">
-                        <div class="product-filter-group">
-                            <div class="sortbyset">
-                                <span class="sortbytitle">Show : </span>
-                                <div class="sorting-select select-one">
-                                    <select class="form-control select">
-                                        <option>5</option>
-                                        <option>10</option>
-                                        <option>15</option>
-                                        <option>20</option>
-                                    </select>
-                                </div>
-                                <div class="sorting-select select-two">
-                                    <select class="form-control select">
-                                        <option>Low to High</option>
-                                        <option>High to Low</option>
-                                    </select>
-                                </div>
-                                <div class="sorting-select select-three">
-                                    <select class="form-control select">
-                                        <option>Popular</option>
-                                        <option>Toyota Camry SE 350</option>
-                                        <option>Audi A3 2019 new</option>
-                                        <option>Ferrari 458 MM Speciale</option>
-                                        <option>Chevrolet Camaro</option>
-                                        <option>Acura Sport Version</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="grid-listview">
-                                <ul>
-                                    <li>
-                                        <a href="listing-grid.php" class="active">
-                                            <i class="feather-grid"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="listing-list.php">
-                                            <i class="feather-list"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <section class="section car-listing">
         <div class="container">
             <div class="row">
@@ -95,7 +38,7 @@ include 'include/header-links.php';
                         </div>
                         <div class="product-search">
                             <div class="form-custom">
-                                <input type="text" class="form-control" id="member_search1" placeholder>
+                                <input type="text" class="form-control" id="searchCar"  placeholder>
                                 <span><img src="assets/img/icons/search.svg" alt="img"></span>
                             </div>
                         </div>
@@ -121,7 +64,7 @@ include 'include/header-links.php';
                                                         while ($row = $result->fetch_assoc()) {
                                                     ?>
                                                     <label class="custom_check w-100">
-                                                        <input type="checkbox" name="username">
+                                                        <input type="checkbox" name="username" class="common_selector brand" value="<?php echo $row['brand_id']; ?>">
                                                         <span class="checkmark"></span> <?php echo $row['brand_name']; ?>
                                                     </label>
                                                     <?php } ?>
@@ -153,7 +96,7 @@ include 'include/header-links.php';
                                                 while ($row = $result->fetch_assoc()) {
                                             ?>
                                                 <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
+                                                    <input type="checkbox" name="username" class="common_selector category" value="<?php echo $row['category_id']; ?>">
                                                     <span class="checkmark"></span> <?php echo $row['category_name']; ?>
                                                 </label>
                                             <?php } ?>
@@ -177,32 +120,20 @@ include 'include/header-links.php';
                                     <div id="checkBoxes3">
                                         <div class="selectBox-cont">
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="bystatus">
-                                                <span class="checkmark"></span> 1-4
+                                                <input type="checkbox" name="bystatus" class="common_selector capacity" value="2">
+                                                <span class="checkmark"></span> 2
                                             </label>
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="bystatus">
-                                                <span class="checkmark"></span> 1-6
+                                                <input type="checkbox" name="bystatus" class="common_selector capacity" value="4">
+                                                <span class="checkmark"></span> 4
                                             </label>
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="bystatus">
-                                                <span class="checkmark"></span> 4-6
+                                                <input type="checkbox" name="bystatus" class="common_selector capacity" value="5">
+                                                <span class="checkmark"></span> 5
                                             </label>
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="bystatus">
-                                                <span class="checkmark"></span>4-8
-                                            </label>
-                                            <label class="custom_check w-100">
-                                                <input type="checkbox" name="bystatus">
-                                                <span class="checkmark"></span>8+
-                                            </label>
-                                            <label class="custom_check w-100">
-                                                <input type="checkbox" name="bystatus">
-                                                <span class="checkmark"></span> 10+
-                                            </label>
-                                            <label class="custom_check w-100">
-                                                <input type="checkbox" name="bystatus">
-                                                <span class="checkmark"></span> 15+
+                                                <input type="checkbox" name="bystatus" class="common_selector capacity" value="8">
+                                                <span class="checkmark"></span>8
                                             </label>
                                         </div>
                                     </div>
@@ -215,7 +146,7 @@ include 'include/header-links.php';
                             <div class="card-header-new" id="headingFour">
                                 <h6 class="filter-title">
                                     <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                        Price
+                                        Max Per Hour Rate
                                         <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
                                     </a>
                                 </h6>
@@ -223,7 +154,7 @@ include 'include/header-links.php';
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample4">
                                 <div class="card-body-chat">
                                     <div class="filter-range">
-                                        <input type="text" class="input-range">
+                                        <input type="text" class="input-range price" id="price" value="">
                                     </div>
                                 </div>
                             </div>
@@ -243,7 +174,7 @@ include 'include/header-links.php';
                                     <div id="checkBoxes4">
                                         <div class="selectBox-cont">
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
+                                                <input type="checkbox" name="category" class="common_selector" value="5">
                                                 <span class="checkmark"></span>
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
@@ -252,7 +183,7 @@ include 'include/header-links.php';
                                                 <i class="fas fa-star filled"></i>
                                             </label>
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
+                                                <input type="checkbox" name="category" class="common_selector" value="4">
                                                 <span class="checkmark"></span>
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
@@ -260,14 +191,14 @@ include 'include/header-links.php';
                                                 <i class="fas fa-star filled"></i>
                                             </label>
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
+                                                <input type="checkbox" name="category" class="common_selector" value="3">
                                                 <span class="checkmark"></span>
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
                                             </label>
                                             <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
+                                                <input type="checkbox" name="category" class="common_selector" value="2">
                                                 <span class="checkmark"></span>
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
@@ -275,7 +206,7 @@ include 'include/header-links.php';
                                             <div class="view-content">
                                                 <div class="viewall-Two">
                                                     <label class="custom_check w-100">
-                                                        <input type="checkbox" name="username">
+                                                        <input type="checkbox" name="username" class="common_selector" value="1">
                                                         <span class="checkmark"></span>
                                                         <i class="fas fa-star filled"></i>
                                                     </label>
@@ -286,172 +217,12 @@ include 'include/header-links.php';
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion" id="accordionMain6">
-                            <div class="card-header-new" id="headingSix">
-                                <h6 class="filter-title">
-                                    <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                                        Customer Recommendation
-                                        <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                    </a>
-                                </h6>
-                            </div>
-                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample6">
-                                <div class="card-body-chat">
-                                    <div id="checkBoxes5">
-                                        <div class="selectBox-cont">
-                                            <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
-                                                <span class="checkmark"></span> 70% & up
-                                            </label>
-                                            <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
-                                                <span class="checkmark"></span> 60% & up
-                                            </label>
-                                            <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
-                                                <span class="checkmark"></span> 50% & up
-                                            </label>
-                                            <label class="custom_check w-100">
-                                                <input type="checkbox" name="category">
-                                                <span class="checkmark"></span> 40% & up
-                                            </label>
-                                            <div class="viewall-Two">
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span>30% & up
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary filter-btn">
-                            <span><i class="feather-filter me-2"></i></span>Filter results
-                        </button>
                         <a href class="reset-filter">Reset Filter</a>
                     </form>
                 </div>
                 <div class="col-lg-9">
-                    <div class="row">
-                        <?php
-                            # Prepare the SELECT Query
-                            $sqlCars = "SELECT *,
-                                    (SELECT name from owners where owner_id = car_details.owner_id) as ownerName
-                                     FROM car_details";
-                            $result = $conn->query($sqlCars);
-                            while ($row = $result->fetch_assoc()) {
-                        ?>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                                <div class="listing-item">
-                                    <div class="listing-img">
-                                        <a href="listing-details.php">
-                                            <img src="dashboard/assets/images/car/<?php echo $row['image']; ?>" class="img-fluid" alt="Toyota">
-                                        </a>
-                                        <div class="fav-item">
-                                            <span class="featured-text">Toyota</span>
-                                            <a href="javascript:void(0)" class="fav-icon">
-                                                <i class="feather-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="listing-content">
-                                        <div class="listing-features">
-                                            <a href="javascript:void(0)" class="author-img">
-                                                <img src="assets/img/profiles/avatar-0.jpg" alt="author">
-                                            </a>
-                                            <h3 class="listing-title">
-                                                <a href="listing-details.php"><?php echo $row['car_name'] ?></a>
-                                            </h3>
-                                            <div class="list-rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <span>(5.0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="listing-details-group">
-                                            <ul>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-05.svg" alt="Auto"></span>
-                                                    <p>Auto</p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-02.svg" alt="10 KM"></span>
-                                                    <p><?php echo $row['mileage'] ?> KM</p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-03.svg" alt="Petrol"></span>
-                                                    <p>Petrol</p>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-04.svg" alt="Power"></span>
-                                                    <p>Power</p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-05.svg" alt="2018"></span>
-                                                    <p><?php echo $row['vehicle_model'] ?></p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                    <p><?php echo $row['noofseats'] ?> Persons</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="listing-location-details">
-
-                                            <div class="listing-price">
-                                                <h6>£400 <span>/ Day</span></h6>
-                                            </div>
-                                        </div>
-                                        <div class="listing-button">
-                                            <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php  }?>
-
+                    <div class="row filter_data">
                     </div>
-
-                    <div class="blog-pagination">
-                        <nav>
-                            <ul class="pagination page-item justify-content-center">
-                                <li class="previtem">
-                                    <a class="page-link" href="#"><i class="fas fa-regular fa-arrow-left me-2"></i> Prev</a>
-                                </li>
-                                <li class="justify-content-center pagination-center">
-                                    <div class="page-group">
-                                        <ul>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">1</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="active page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">4</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">5</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nextlink">
-                                    <a class="page-link" href="#">Next <i class="fas fa-regular fa-arrow-right ms-2"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -465,5 +236,57 @@ include 'include/header-links.php';
 <?php
 include 'include/footer-scripts.php';
 ?>
+<script>
+    $(document).ready(function() {
+
+        filter_data();
+
+        function filter_data() {
+            $('.filter_data').html('<div id="loading" style="" ></div>');
+            var action = 'fetch_data';
+            var search = $('#searchCar').val();
+            var price = $('#price').val();
+            var brand = get_filter('brand');
+            var category = get_filter('category');
+            var capacity = get_filter('capacity');
+            $.ajax({
+                url: "fetch-filter-car.php",
+                method: "POST",
+                data: {
+                    action: action,
+                    price: price,
+                    brand: brand,
+                    category: category,
+                    capacity: capacity,
+                    search: search
+                },
+                success: function (data) {
+                    $('.filter_data').html(data);
+                }
+            });
+        }
+
+        function get_filter(class_name) {
+            var filter = [];
+            $('.' + class_name + ':checked').each(function () {
+                filter.push($(this).val());
+            });
+            return filter;
+        }
+
+        $('.common_selector').click(function () {
+            filter_data();
+        });
+
+        $('#price').keyup(function () {
+            filter_data();
+        });
+        $('#searchCar').keyup(function () {
+            filter_data();
+        });
+
+    });
+
+</script>
 </body>
 </html>

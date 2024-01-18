@@ -17,3 +17,4 @@
 <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>

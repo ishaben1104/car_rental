@@ -108,7 +108,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                 <!-- Contact no. -->
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="form-label" for="phone">Contact No.</label>
                                                         <div class="form-control-wrap">
@@ -117,7 +117,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                 <!-- Zip code -->
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="form-label" for="code">Zipcode</label>
                                                         <div class="form-control-wrap">
@@ -126,7 +126,7 @@ include 'include/session.php';
                                                     </div>
                                                 </div>
                                                  <!-- Username -->
-                                                 <div class="col-md-6">
+                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="form-label" for="uname">Username</label>
                                                         <div class="form-control-wrap">

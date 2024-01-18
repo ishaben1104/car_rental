@@ -11,6 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])) {
     $category = $_POST["category"];
     $noofseats = $_POST["noofseats"];
     $comments = $_POST["comments"];
+    $fuelType = $_POST["fuelType"];
+    $transmission = $_POST["transmission"];
+    $perHourRate = $_POST["perHourRate"];
+    $location = $_POST["location"];
+
 
     if ($_FILES["customFile"]["size"] > 0){
         $customFile = $_FILES["customFile"]["name"];
@@ -18,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])) {
         $folder = "assets/images/car/".basename($_FILES["customFile"]["name"]);
         //SQL query to inser data into the database
         $sql = "UPDATE `car_details` SET side_windows='$sideWindows', color='$color', mileage='$mileage', 
-    alarm_type='$alarmType', category_id='$category', noofseats='$noofseats', comments='$comments', `image` = '$customFile' 
+    alarm_type='$alarmType', category_id='$category', noofseats='$noofseats', comments='$comments', `image` = '$customFile', `fuel_type` = '$fuelType' , `transmission` = '$transmission', `per_hour_rate` = '$perHourRate', `location` = '$location'
     WHERE car_id='$id'";
 
         //Execute the query
@@ -32,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])) {
     }else{
         //SQL query to inser data into the database
         $sql = "UPDATE `car_details` SET side_windows='$sideWindows', color='$color', mileage='$mileage', 
-    alarm_type='$alarmType', category_id='$category', noofseats='$noofseats', comments='$comments' 
+    alarm_type='$alarmType', category_id='$category', noofseats='$noofseats', comments='$comments', `fuel_type` = '$fuelType' , `transmission` = '$transmission', `per_hour_rate` = '$perHourRate', `location` = '$location' 
     WHERE car_id='$id'";
 
         //Execute the query
@@ -49,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <?php
 include 'include/header-links.php';
 include 'include/session.php';
@@ -218,12 +223,68 @@ include 'include/session.php';
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <!-- Car Transmission -->
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="transmission">Transmission</label>
+                                                                <div class="form-control-wrap">
+                                                                    <ul class="custom-control-group">
+                                                                        <li>
+                                                                            <div class="custom-control custom-radio">
+                                                                                <input type="radio" class="custom-control-input" name="transmission" value="auto" <?php if (isset($row['transmission']) && $row['transmission'] == 'auto' ) { ?> checked  <?php } else if ($row['transmission'] != 'manual'){ ?> checked <?php } ?> id="auto" required>
+                                                                                <label class="custom-control-label" for="auto">Auto</label>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="custom-control custom-radio">
+                                                                                <input type="radio" class="custom-control-input" name="transmission" <?php if (isset($row['transmission']) && $row['transmission'] == 'manual' ) { ?> checked  <?php } ?> value="manual" id="manual" required>
+                                                                                <label class="custom-control-label" for="manual">Manual</label>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Fuel Type -->
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="fuelType">Fuel Type</label>
+                                                                <div class="form-control-wrap">
+                                                                    <ul class="custom-control-group">
+                                                                        <li>
+                                                                            <div class="custom-control custom-radio">
+                                                                                <input type="radio" class="custom-control-input" name="fuelType" value="petrol" id="petrol" <?php if (isset($row['fuel_type']) && $row['fuel_type'] == 'petrol' ) { ?> checked  <?php } else if ($row['fuel_type'] == ''){ ?> checked <?php } ?> required>
+                                                                                <label class="custom-control-label" for="petrol">Petrol</label>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="custom-control custom-radio">
+                                                                                <input type="radio" class="custom-control-input" name="fuelType" value="diesel" id="diesel"  <?php if (isset($row['fuel_type']) && $row['fuel_type'] == 'diesel' ) { ?> checked  <?php }  ?> required>
+                                                                                <label class="custom-control-label" for="diesel">Diesel</label>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="custom-control custom-radio">
+                                                                                <input type="radio" class="custom-control-input" name="fuelType" value="electric" id="electric" <?php if (isset($row['fuel_type']) && $row['fuel_type'] == 'electric' ) { ?> checked  <?php }  ?> required>
+                                                                                <label class="custom-control-label" for="electric">Electric</label>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="custom-control custom-radio">
+                                                                                <input type="radio" class="custom-control-input" name="fuelType" value="hybrid" id="hybrid" <?php if (isset($row['fuel_type']) && $row['fuel_type'] == 'hybrid' ) { ?> checked  <?php }  ?> required>
+                                                                                <label class="custom-control-label" for="hybrid">Hybrid</label>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <!-- Alarm Type -->
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="alarmType">Alarm Type</label>
                                                                 <div class="form-control-wrap ">
-                                                                    <select class="form-select js-select2" id="alarmType" name="alarmType" value="<?php echo $row['alarm_type']; ?>" data-placeholder="Select a option" required>
+                                                                    <select class="form-select js-select2" id="alarmType" name="alarmType" data-placeholder="Select a option" required>
                                                                         <option value="Silent Alarm">Silent Alarm</option>
                                                                         <option value="Passive Alarm">Passive Alarm</option>
                                                                         <option value="Paging">Paging</option>
@@ -278,7 +339,25 @@ include 'include/session.php';
                                                             <div class="form-group">
                                                                 <label class="form-label" for="comments">Comments</label>
                                                                 <div class="form-control-wrap">
-                                                                    <textarea class="form-control form-control-sm" id="comments" name="comments" value="<?php echo $row['comments']; ?>" placeholder="Enter comments if any"></textarea>
+                                                                    <textarea class="form-control form-control-sm" id="comments" name="comments" placeholder="Enter comments if any"><?php echo $row['comments']; ?></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Location -->
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="location">Location</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="location" name="location" value="<?php echo $row['location']; ?>" placeholder="Romford" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Per Hour Rate -->
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="perHourRate">Per Hour Rate</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="number" class="form-control" id="perHourRate" name="perHourRate" value="<?php echo $row['per_hour_rate']; ?>" placeholder="5" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -316,6 +395,20 @@ include 'include/session.php';
     <?php
     include 'include/footer-scripts.php';
     ?>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(document).on('keyup','#location',function(){
+            $( "#location" ).autocomplete({
+                source:function(request,response){
+                    $.post("autocomplete.php",{'name':$( "#location" ).val()}).done(function(data, status){
+
+                        response(JSON.parse(data));
+                    });
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>

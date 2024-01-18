@@ -3,6 +3,8 @@
 
 <?php
 include 'include/header-links.php';
+include '../config/connection.php';
+include 'include/session.php';
 ?>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -13,7 +15,7 @@ include 'include/header-links.php';
             include 'include/sidebar.php';
             ?>
             <!-- wrap @s -->
-            <div class="nk-wrap ">
+            <div class="nk-wrap">
                 <?php
                 include 'include/header.php';
                 ?>
@@ -22,10 +24,12 @@ include 'include/header-links.php';
                     <div class="container-fluid">
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
-                                <div class="nk-block-head nk-block-head-sm">
-                                    <div class="nk-block-between">
-                                        <div class="nk-block-head-content">
-                                            <h3 class="nk-block-title page-title">Overview</h3>
+                                <div class="components-preview wide-lg mx-auto">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">Bookings</h3>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
