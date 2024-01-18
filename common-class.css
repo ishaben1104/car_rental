@@ -1,15 +1,21 @@
+/*/ color classes /*/
 .bg-grey {
     background-color: #f2f2f2;
 }
 
+.theme-color-black {color: #201F1D; }
 .logo-white {
     width: 75%;
 }
 
+/*/ font sizes /*/
 .f-12 { font-size: 12px; }
-
+.f-20 { font-size: 20px; }
+.f-23 { font-size: 23px; }
 .f-28 { font-size: 28px; }
+.f-40 { font-size: 40px; }
 
+/*/ margin classes /*/
 .mt-10 {
     margin-top: 10px;
 }
@@ -21,6 +27,13 @@
 .mb-30 {
     margin-bottom: 30px !important;
 }
+
+.mb-40 {
+    margin-bottom: 40px !important;
+}
+.mb-100 {
+    margin-bottom: 100px;
+}
 .ml-10 {
     margin-left: 10px;
 }
@@ -29,6 +42,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 
 .cursor-pointer {
     cursor: pointer;
