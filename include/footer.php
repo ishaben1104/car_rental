@@ -19,19 +19,16 @@
                                 <h5 class="footer-title">Vehicles Type</h5>
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0)">All Vehicles</a>
+                                        <a href="car-list.php">All Vehicles</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">SUVs</a>
+                                        <a href="car-list.php">Mazda</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Trucks</a>
+                                        <a href="car-list.php">Audi</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Electrified Vehicles</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">Hybrids</a>
+                                        <a href="car-list.php">Honda</a>
                                     </li>
                                 </ul>
                             </div>
@@ -43,19 +40,16 @@
                                 <h5 class="footer-title">Quick links</h5>
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0)">My Account</a>
+                                        <a href="dashboard/sign-in.php" target="_blank">Admin Dashboard</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Admin Dashboard</a>
+                                        <a href="dashboard/sign-in.php" target="_blank">Owner Dashboard</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Owner Dashboard</a>
+                                        <a href="terms-condition.php" target="_blank">Terms & Conditions</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Terms & Conditions</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">Privacy Policy</a>
+                                        <a href="privacy-policy.php" target="_blank">Privacy Policy</a>
                                     </li>
                                 </ul>
                             </div>
@@ -76,7 +70,7 @@
                             <div class="footer-address">
                                 <span><i class="feather-mail"></i></span>
                                 <div class="addr-info">
-                                    <a href="mailto:support@example.com">support@example.com</a>
+                                    <a href="mailto:support@example.com">support@dreamsrent.com</a>
                                 </div>
                             </div>
                         </div>
