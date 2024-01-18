@@ -2,7 +2,7 @@
 //Database connection parameters
 $servername = "localhost";
 $username = "root";
-$password = "Current@2020";
+$password = "";
 $database = "car_rental";
 
 //Create a connection
