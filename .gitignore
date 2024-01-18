@@ -6,4 +6,4 @@
 *.iml
 out
 gen
-config/connection.php
+/config/connection.php
