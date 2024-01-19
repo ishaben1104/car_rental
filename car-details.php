@@ -1,13 +1,13 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 include 'config/connection.php';
 
-    $car_id = $_GET['id'];
-    # Prepare the SELECT Query
-    $sqlCarDetails = "SELECT cd.*, cb.brand_name, cb.brand_id, cc.category_id, cc.category_name FROM car_details as cd LEFT JOIN car_brand as cb ON cd.brand_id = cb.brand_id LEFT JOIN car_category as cc ON cc.category_id = cd.category_id WHERE car_id = '$car_id'";
-    $resultCarDetails = $conn->query($sqlCarDetails);
-    $rowCarDetails = $resultCarDetails->fetch_assoc();
+$car_id = $_GET['id'];
+# Prepare the SELECT Query
+$sqlCarDetails = "SELECT cd.*, cb.brand_name, cb.brand_id, cc.category_id, cc.category_name FROM car_details as cd LEFT JOIN car_brand as cb ON cd.brand_id = cb.brand_id LEFT JOIN car_category as cc ON cc.category_id = cd.category_id WHERE car_id = '$car_id'";
+$resultCarDetails = $conn->query($sqlCarDetails);
+$rowCarDetails = $resultCarDetails->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,13 +26,6 @@ include 'include/header-links.php';
                 <div class="row align-items-center text-center">
                     <div class="col-md-12 col-12">
                         <h2 class="breadcrumb-title"><?php echo $rowCarDetails['car_name']; ?></h2>
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Listings</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><?php echo $rowCarDetails['car_name']; ?></li>
-                            </ol>
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -77,12 +70,6 @@ include 'include/header-links.php';
                                     <img src="dashboard/assets/images/car/<?php echo $rowCarDetails['image']; ?>" alt="Slider">
                                 </div>
                             </div>
-                        </div>
-                        <div class="review-sec extra-service">
-                            <div class="review-header">
-                                <h4>Extra Service</h4>
-                            </div>
-                            <span>Baby Seat - $10</span>
                         </div>
 
                         <div class="review-sec specification-card ">
@@ -134,7 +121,7 @@ include 'include/header-links.php';
                                             </div>
                                             <div class="featues-info">
                                                 <span>Mileage </span>
-                                                <h6><?php echo $rowCarDetails['mileage']; ?> Km</h6>
+                                                <h6><?php echo $rowCarDetails['mileage']; ?> miles</h6>
                                             </div>
                                         </div>
                                         <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
@@ -353,6 +340,23 @@ include 'include/header-links.php';
                                                                 <input type="email" class="form-control">
                                                             </div>
                                                         </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>Rating <span class="text-danger">*</span></label>
+                                                                <div class="rate">
+                                                                    <input type="radio" id="star5" name="rate" value="5" />
+                                                                    <label for="star5" title="text">5 stars</label>
+                                                                    <input type="radio" id="star4" name="rate" value="4" />
+                                                                    <label for="star4" title="text">4 stars</label>
+                                                                    <input type="radio" id="star3" name="rate" value="3" />
+                                                                    <label for="star3" title="text">3 stars</label>
+                                                                    <input type="radio" id="star2" name="rate" value="2" />
+                                                                    <label for="star2" title="text">2 stars</label>
+                                                                    <input type="radio" id="star1" name="rate" value="1" />
+                                                                    <label for="star1" title="text">1 star</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
                                                                 <label>Comments </label>
@@ -449,69 +453,6 @@ include 'include/header-links.php';
                                     </ul>
                                 </form>
                             </div>
-                        </div>
-                        <div class="review-sec extra-service mt-0">
-                            <div class="review-header">
-                                <h4>Listing Owner Details</h4>
-                            </div>
-                            <div class="owner-detail">
-                                <div class="owner-img">
-                                    <a href><img src="assets/img/profiles/avatar-07.jpg" alt></a>
-                                </div>
-                                <div class="reviewbox-list-rating">
-                                    <h5><a>Brooklyn Cars</a></h5>
-                                    <p>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <span> (5.0)</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <ul class="booking-list">
-                                <li>
-                                    No of Listings
-                                    <span>05</span>
-                                </li>
-                                <li>
-                                    No of Bookings
-                                    <span>225</span>
-                                </li>
-                                <li>
-                                    Verification
-                                    <h6>Verified</h6>
-                                </li>
-                            </ul>
-                            <div class="message-btn">
-                                <a href="#" class="btn btn-order">Message to owner</a>
-                            </div>
-                        </div>
-                        <div class="review-sec share-car mt-0">
-                            <div class="review-header">
-                                <h4>Share this car</h4>
-                            </div>
-                            <ul class="nav-social">
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa-brands fa-facebook-f fa-facebook fi-icon"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fab fa-instagram fi-icon"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fab fa-behance fi-icon"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa-brands fa-pinterest-p fi-icon"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fab fa-twitter fi-icon"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fab fa-linkedin fi-icon"></i></a>
-                                </li>
-                            </ul>
                         </div>
                         <div class="review-sec share-car mt-0 mb-0">
                             <div class="review-header">

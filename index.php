@@ -321,7 +321,7 @@ include 'include/header-links.php';
                                     </div>
                                     <div class="count-content">
                                         <h4><span class=""><?php echo $rowCounts['driver_count']; ?></span></h4>
-                                        <p>Happy Customers</p>
+                                        <p class="mh-45">Happy Customers</p>
                                     </div>
                                 </div>
                             </div>
@@ -334,7 +334,7 @@ include 'include/header-links.php';
                                     </div>
                                     <div class="count-content">
                                         <h4><span class=""><?php echo $rowCounts['booking_count']; ?></span></h4>
-                                        <p>Completed Bookings</p>
+                                        <p class="mh-45">Completed Bookings</p>
                                     </div>
                                 </div>
                             </div>
@@ -347,7 +347,7 @@ include 'include/header-links.php';
                                     </div>
                                     <div class="count-content">
                                         <h4><span class=""><?php echo $rowCounts['car_count']; ?></span></h4>
-                                        <p>Count of Cars</p>
+                                        <p class="mh-45">Count of Cars</p>
                                     </div>
                                 </div>
                             </div>
@@ -360,7 +360,7 @@ include 'include/header-links.php';
                                     </div>
                                     <div class="count-content">
                                         <h4><span class=""><?php echo $rowCounts['owner_count']; ?></span></h4>
-                                        <p>Car Owners</p>
+                                        <p class="mh-45">Car Owners</p>
                                     </div>
                                 </div>
                             </div>

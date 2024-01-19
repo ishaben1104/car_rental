@@ -212,7 +212,7 @@ include 'include/header-links.php';
                         <div class="col-md-6 order-lg-last">
                             <ul class="nav nav-sm justify-content-center justify-content-lg-end">
                                 <li class="nav-item">
-                                    <a class="nav-link terms-policy" href="terms-condition.php" target="_blank">Terms & Condition</a>
+                                    <a class="nav-link terms-policy" href="terms-condition.php" target="_blank">Terms & Conditions</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link terms-policy" href="privacy-policy.php" target="_blank">Privacy Policy</a>

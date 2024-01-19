@@ -42,7 +42,7 @@
                             <div class="col-lg-6 order-lg-last">
                                 <ul class="nav nav-sm justify-content-center justify-content-lg-end">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Terms & Condition</a>
+                                        <a class="nav-link" href="#">Terms & Conditions</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Privacy Policy</a>
