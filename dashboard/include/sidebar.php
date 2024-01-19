@@ -68,7 +68,7 @@
                          </li>
                      <?php } ?>
                      <li class="nk-menu-item">
-                         <a href="driver-list.php" class="nk-menu-link">
+                         <a href="bookings.php" class="nk-menu-link">
                              <span class="nk-menu-icon"><em class="icon fas fa-calendar-alt"></em></span>
                              <span class="nk-menu-text">Bookings</span>
                          </a>

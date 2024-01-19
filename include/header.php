@@ -48,7 +48,6 @@
                         <input type="checkbox" id="dropdown-toggle" class="toggle-input">
                         <ul class="submenu">
                             <li><a href="my-account.php">My Profile</a></li>
-                            <li><a href="booking.php">My Bookings</a></li>
                             <li><a href="logout.php">Logout</a></li>
                         </ul>
                     </li>

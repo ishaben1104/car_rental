@@ -100,20 +100,11 @@ include 'include/session.php';
                                                 <form method="post" enctype="multipart/form-data">
                                                     <div class="row g-gs">
                                                         <!-- Registration No of Vehicle -->
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="regNo">Registration No of Vehicle</label>
                                                                 <div class="form-control-wrap">
                                                                     <input class="form-control" id="regNo" name="regNo" value="<?php echo $row['registeration_no']; ?>" placeholder="213121" disabled>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Vehicle Name -->
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="vn">Car Name</label>
-                                                                <div class="form-control-wrap ">
-                                                                    <input class="form-control" id="vn" name="vn" placeholder="BMW" value="<?php echo $row['car_name']; ?>" disabled>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -140,30 +131,19 @@ include 'include/session.php';
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Upload File -->
+                                                        <!-- Car Name -->
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="noofseats">Upload photo</label>
-                                                                <div class="form-control-wrap">
-                                                                    <div class="form-file">
-                                                                        <input type="file" class="form-file-input" id="customFile" name="customFile" onchange="loadFile(event)">
-                                                                        <label class="form-file-label" for="customFile">Choose file</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="categoryImage"></label>
-                                                                <div class="form-control-wrap">
-                                                                    <img class="form-control" src="assets/images/car/<?php echo $row['image']; ?>" style="width: 60px;">
+                                                                <label class="form-label" for="vn">Car Name</label>
+                                                                <div class="form-control-wrap ">
+                                                                    <input class="form-control" id="vn" name="vn" placeholder="BMW" value="<?php echo $row['car_name']; ?>" disabled>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <!-- Number Etched into side Windows -->
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="sideWindows">Number Etched into side Windows</label>
+                                                                <label class="form-label" for="sideWindows">No. Etched into side Windows</label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="number" class="form-control" id="sideWindows" name="sideWindows" value="<?php echo $row['side_windows']; ?>" placeholder="21" required>
                                                                 </div>
@@ -172,7 +152,7 @@ include 'include/session.php';
                                                         <!-- Chassis Number/Vehicle Identification Number -->
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="vin">Chassis Number/Vehicle Identification Number</label>
+                                                                <label class="form-label" for="vin">Chassis Number</label>
                                                                 <div class="form-control-wrap">
                                                                     <input class="form-control" id="vin" name="vin" placeholder="23123123123123123" value="<?php echo $row['vehicle_idno']; ?>" disabled>
                                                                 </div>
@@ -188,7 +168,7 @@ include 'include/session.php';
                                                             </div>
                                                         </div>
                                                         <!-- Vehicle Make -->
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="vehicleMake">Vehicle Make</label>
                                                                 <div class="form-control-wrap">
@@ -197,7 +177,7 @@ include 'include/session.php';
                                                             </div>
                                                         </div>
                                                         <!-- Vehicle Model -->
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="vehicleModel">Vehicle Model</label>
                                                                 <div class="form-control-wrap">
@@ -206,7 +186,7 @@ include 'include/session.php';
                                                             </div>
                                                         </div>
                                                         <!-- Color -->
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="color">Color</label>
                                                                 <div class="form-control-wrap">
@@ -215,7 +195,7 @@ include 'include/session.php';
                                                             </div>
                                                         </div>
                                                         <!-- Current Mileage -->
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="mileage">Current Mileage</label>
                                                                 <div class="form-control-wrap">
@@ -296,7 +276,7 @@ include 'include/session.php';
                                                             </div>
                                                         </div>
                                                         <!-- Category -->
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="category">Category</label>
                                                                 <div class="form-control-wrap ">
@@ -326,11 +306,49 @@ include 'include/session.php';
                                                             </div>
                                                         </div>
                                                         <!-- Number of seats -->
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="noofseats">Number of seats</label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="number" class="form-control" id="noofseats" name="noofseats" value="<?php echo $row['noofseats']; ?>" placeholder="5" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Location -->
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="location">Location</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="location" name="location" value="<?php echo $row['location']; ?>" placeholder="Romford" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Hourly Rate -->
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="perHourRate">Hourly Rate</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="number" class="form-control" id="perHourRate" name="perHourRate" value="<?php echo $row['per_hour_rate']; ?>" placeholder="5" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Upload File -->
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="noofseats">Upload photo</label>
+                                                                <div class="form-control-wrap">
+                                                                    <div class="form-file">
+                                                                        <input type="file" class="form-file-input" id="customFile" name="customFile" onchange="loadFile(event)">
+                                                                        <label class="form-file-label" for="customFile">Choose file</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="categoryImage"></label>
+                                                                <div class="form-control-wrap">
+                                                                    <img class="form-control w-70" src="assets/images/car/<?php echo $row['image']; ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -340,24 +358,6 @@ include 'include/session.php';
                                                                 <label class="form-label" for="comments">Comments</label>
                                                                 <div class="form-control-wrap">
                                                                     <textarea class="form-control form-control-sm" id="comments" name="comments" placeholder="Enter comments if any"><?php echo $row['comments']; ?></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Location -->
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="location">Location</label>
-                                                                <div class="form-control-wrap">
-                                                                    <input type="text" class="form-control" id="location" name="location" value="<?php echo $row['location']; ?>" placeholder="Romford" required>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Per Hour Rate -->
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="perHourRate">Per Hour Rate</label>
-                                                                <div class="form-control-wrap">
-                                                                    <input type="number" class="form-control" id="perHourRate" name="perHourRate" value="<?php echo $row['per_hour_rate']; ?>" placeholder="5" required>
                                                                 </div>
                                                             </div>
                                                         </div>

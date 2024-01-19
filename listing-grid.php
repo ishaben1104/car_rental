@@ -146,7 +146,7 @@ include 'include/header-links.php';
                                 <div class="card-header-new" id="headingFour">
                                     <h6 class="filter-title">
                                         <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                            Max Per Hour Rate
+                                            Max Rate Per Hour 
                                             <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
                                         </a>
                                     </h6>

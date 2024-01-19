@@ -3,7 +3,7 @@ include '../config/connection.php';
 
 // Fetch Car Category Details
 $id = "";
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $editOwnerSql = "SELECT * FROM `owners` WHERE owner_id = '$id'";
     $editOwnerResult = $conn->query($editOwnerSql);
@@ -14,7 +14,7 @@ if(isset($_GET['id'])){
         $editUserSql = "SELECT * FROM `user_register` WHERE user_id = '$user_id'";
         $editUserResult = $conn->query($editUserSql);
         $rowEditUser = $editUserResult->fetch_assoc();
-    }else{
+    } else {
         echo "<h3>No Data Found!</h3>";
         die;
     }
@@ -78,7 +78,12 @@ include 'include/session.php';
                                 <div class="nk-block-head nk-block-head-sm">
                                     <div class="nk-block-between">
                                         <div class="nk-block-head-content">
-                                            <h3 class="nk-block-title page-title">Edit Owner Details</h3>
+                                            <?php if ($_SESSION['roletype'] == 'owner') { ?>
+                                                <h3 class="nk-block-title page-title">Edit Profile Details</h3>
+                                            <?php } ?>
+                                            <?php if ($_SESSION['roletype'] == 'admin') { ?>
+                                                <h3 class="nk-block-title page-title">Edit Owner Details</h3>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -125,8 +130,8 @@ include 'include/session.php';
                                                         </div>
                                                     </div>
                                                 </div>
-                                                 <!-- Username -->
-                                                 <div class="col-md-4">
+                                                <!-- Username -->
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="form-label" for="uname">Username</label>
                                                         <div class="form-control-wrap">
@@ -145,19 +150,19 @@ include 'include/session.php';
                                                             <ul class="custom-control-group">
                                                                 <li>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" name="gender" value="male" id="sex-male" <?php if($rowEditOwner['gender'] == "male"){ ?> checked <?php } ?> required>
+                                                                        <input type="radio" class="custom-control-input" name="gender" value="male" id="sex-male" <?php if ($rowEditOwner['gender'] == "male") { ?> checked <?php } ?> required>
                                                                         <label class="custom-control-label" for="sex-male">Male</label>
                                                                     </div>
                                                                 </li>
                                                                 <li>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" name="gender" value="female" id="sex-female" <?php if($rowEditOwner['gender'] == "female"){ ?> checked <?php } ?> required>
+                                                                        <input type="radio" class="custom-control-input" name="gender" value="female" id="sex-female" <?php if ($rowEditOwner['gender'] == "female") { ?> checked <?php } ?> required>
                                                                         <label class="custom-control-label" for="sex-female">Female</label>
                                                                     </div>
                                                                 </li>
                                                                 <li>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" name="gender" value="other" id="sex-other" <?php if($rowEditOwner['gender'] == "other"){ ?> checked <?php } ?> required>
+                                                                        <input type="radio" class="custom-control-input" name="gender" value="other" id="sex-other" <?php if ($rowEditOwner['gender'] == "other") { ?> checked <?php } ?> required>
                                                                         <label class="custom-control-label" for="sex-other">Others</label>
                                                                     </div>
                                                                 </li>

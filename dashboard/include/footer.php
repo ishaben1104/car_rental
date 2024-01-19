@@ -1,5 +1,5 @@
-<div class="nk-footer nk-auth-footer-full">
-    <div class="container wide-lg">
+<footer class="footer">
+    <div class="container">
         <div class="row g-3">
             <div class="col-lg-6 order-lg-last">
                 <ul class="nav nav-sm justify-content-center justify-content-lg-end">
@@ -22,4 +22,4 @@
             </div>
         </div>
     </div>
-</div>
+</footer>
