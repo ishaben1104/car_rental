@@ -18,3 +18,4 @@
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="assets/js/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>

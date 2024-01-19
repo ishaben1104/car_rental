@@ -1,3 +1,19 @@
+<?php
+include 'config/connection.php';
+include 'include/session.php';
+$temp_id = $_COOKIE['booking_id'];
+# Prepare the SELECT Query
+$sqlCarDetails = "SELECT cd.*, cb.brand_name, cb.brand_id, cc.category_id, cc.category_name FROM car_details as cd LEFT JOIN car_brand as cb ON cd.brand_id = cb.brand_id LEFT JOIN car_category as cc ON cc.category_id = cd.category_id WHERE car_id = '$car_id'";
+$resultCarDetails = $conn->query($sqlCarDetails);
+$rowCarDetails = $resultCarDetails->fetch_assoc();
+
+
+$sqlBookingDetails = "SELECT * FROM temporary_booking WHERE temporary_id = '$temp_id'";
+$resultBookingDetails = $conn->query($sqlBookingDetails);
+$rowBookingDetails = $resultBookingDetails->fetch_assoc();
+$bookingDetails = unserialize($rowBookingDetails['booking_details']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -46,17 +62,17 @@ include 'include/header-links.php';
                             <div class="row booking-info">
                                 <div class="col-md-4 col-sm-6 pickup-address">
                                     <h5>Pickup</h5>
-                                    <p>45, 4th Avanue Mark Street USA</p>
-                                    <span>Date & time : 11 Jan 2023</span>
+                                    <p><?php echo $bookingDetails["pickup_city"]; ?></p>
+                                    <span>Date & time : <?php echo $bookingDetails["pickup_date"].' '.$bookingDetails["pickup_time"]; ?></span>
                                 </div>
                                 <div class="col-md-4 col-sm-6 drop-address">
                                     <h5>Drop Off</h5>
-                                    <p>78, 10th street Laplace USA</p>
-                                    <span>Date & time : 11 Jan 2023</span>
+                                    <p><?php echo $bookingDetails["pickup_city"]; ?></p>
+                                    <span>Date & time : <?php echo $bookingDetails["pickup_date"].' '.$bookingDetails["pickup_time"]; ?></span>
                                 </div>
                                 <div class="col-md-4 col-sm-6 booking-amount">
                                     <h5>Amount to be paid</h5>
-                                    <h6><span>$315 </span><i class="feather-info"></i></h6>
+                                    <h6><span>£ <?php echo $bookingDetails["amount"]; ?> </span><i class="feather-info"></i></h6>
                                 </div>
                             </div>
                             <div class="booking-form">

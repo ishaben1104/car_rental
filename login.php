@@ -2,12 +2,16 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include 'config/connection.php';
 
+include 'config/connection.php';
 
 // Check if user is logged in
 if (isset($_SESSION['username']) != "") {
-    header("Location:index.php");
+    if (isset($_COOKIE['redirect_url'])){
+        header("Location:".$_COOKIE['redirect_url']);
+    }else{
+        header("Location:index.php");
+    }
 }
 
 //Check if the form was submitted
@@ -31,7 +35,11 @@ if (isset($_POST['login'])) {
             $_SESSION['roletype'] = $row['role_type'];
             $_SESSION['driver_id'] = $rowDriver['driver_id'];
             echo "<h3>Login Successful!</h3>";
-            echo "<script> location.href = 'index.php'; </script>";
+            if (isset($_COOKIE['redirect_url'])){
+                header("Location:".$_COOKIE['redirect_url']);
+            }else{
+                header("Location:index.php");
+            }
         } else {
             echo 'No records found';
         }
