@@ -1,11 +1,11 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 include 'include/session.php';
 include 'config/connection.php';
 
 $driver_id = $_SESSION['driver_id'];
-if (isset($driver_id)){
+if (isset($driver_id)) {
     $getDriverSql = "SELECT * FROM `drivers` WHERE driver_id = '$driver_id'";
     $getDriverResult = $conn->query($getDriverSql);
     $rowDriver = $getDriverResult->fetch_assoc();
@@ -194,7 +194,7 @@ include 'include/header-links.php';
                                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                     <div class="booking-form">
                                         <div class="booking-title">
-                                            <h5>Edit Details</h5>
+                                            <h4 class="theme-color-black f-23 mb-20">Edit Details</h4>
                                         </div>
                                         <form method="post">
                                             <div class="row g-gs">
@@ -263,22 +263,22 @@ include 'include/header-links.php';
                                                     <div class="form-group">
                                                         <label class="form-label" for="gender">Gender</label>
                                                         <div class="form-control-wrap">
-                                                            <ul class="custom-control-group">
+                                                            <ul class="d-flex justify-content-between ">
                                                                 <li>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" name="gender" value="male" id="sex-male" <?php if($rowDriver['gender'] == "male"){ ?> checked <?php } ?> required>
+                                                                        <input type="radio" class="custom-control-input" name="gender" value="male" id="sex-male" <?php if ($rowDriver['gender'] == "male") { ?> checked <?php } ?> required>
                                                                         <label class="custom-control-label" for="sex-male">Male</label>
                                                                     </div>
                                                                 </li>
                                                                 <li>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" name="gender" value="female" id="sex-female" <?php if($rowDriver['gender'] == "female"){ ?> checked <?php } ?> required>
+                                                                        <input type="radio" class="custom-control-input" name="gender" value="female" id="sex-female" <?php if ($rowDriver['gender'] == "female") { ?> checked <?php } ?> required>
                                                                         <label class="custom-control-label" for="sex-female">Female</label>
                                                                     </div>
                                                                 </li>
                                                                 <li>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" name="gender" value="other" id="sex-other" <?php if($rowDriver['gender'] == "other"){ ?> checked <?php } ?> required>
+                                                                        <input type="radio" class="custom-control-input" name="gender" value="other" id="sex-other" <?php if ($rowDriver['gender'] == "other") { ?> checked <?php } ?> required>
                                                                         <label class="custom-control-label" for="sex-other">Others</label>
                                                                     </div>
                                                                 </li>

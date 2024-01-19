@@ -50,25 +50,25 @@ include 'include/header-links.php';
         <div class="container">
             <div class="contact-info-area">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12 d-flex" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="0.1">
+                    <div class="col-lg-4 col-md-4 col-12 d-flex" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="0.1">
                         <div class="single-contact-info flex-fill">
                             <span><i class="feather-phone-call"></i></span>
                             <h3>Phone Number</h3>
                             <a href="tel:+ 1 (888) 760 1940">+ 1 (888) 760 1940</a>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12 d-flex" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="0.2">
+                    <div class="col-lg-4 col-md-4 col-12 d-flex" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="0.2">
                         <div class="single-contact-info flex-fill">
                             <span><i class="feather-mail"></i></span>
                             <h3>Email Address</h3>
-                            <a href="https://dreamsrent.dreamguystech.com/cdn-cgi/l/email-protection#6d070205031e000419052d08150c001d0108430e0200"><span class="__cf_email__" data-cfemail="c1abaea9afb2aca8b5a981a4b9a0acb1ada4efa2aeac"></span>support@dreamsrent.com</a>
+                            <a href="mailto:support@example.com">support@dreamsrent.com</a>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12 d-flex" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="0.3">
+                    <div class="col-lg-4 col-md-4 col-12 d-flex" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="0.3">
                         <div class="single-contact-info flex-fill">
                             <span><i class="feather-map-pin"></i></span>
                             <h3>Location</h3>
-                            <a href="javascript:void(0);">Northumbria University</a>
+                            <p>110-114 Middlesex St, London E1 7HT</p>
                         </div>
                     </div>
                 </div>

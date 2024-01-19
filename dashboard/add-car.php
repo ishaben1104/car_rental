@@ -160,7 +160,7 @@ include 'include/session.php';
                                                 <!-- Number Etched into side Windows -->
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="form-label" for="sideWindows">Number Etched into side Windows</label>
+                                                        <label class="form-label" for="sideWindows">No. Etched into side Windows</label>
                                                         <div class="form-control-wrap">
                                                             <input type="number" class="form-control" id="sideWindows" name="sideWindows" placeholder="21" required>
                                                         </div>
@@ -169,7 +169,7 @@ include 'include/session.php';
                                                 <!-- Chassis Number/Vehicle Identification Number -->
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="form-label" for="vidno">Chassis Number/Vehicle Identification Number</label>
+                                                        <label class="form-label" for="vidno">Chassis Number</label>
                                                         <div class="form-control-wrap">
                                                             <input type="number" class="form-control" id="vidno" name="vidno" pattern="[0-9]{17}" title="Enter 17 digits number" placeholder="23123123123123123" required>
                                                         </div>
@@ -324,16 +324,6 @@ include 'include/session.php';
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- Comments -->
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="form-label" for="comments">Comments</label>
-                                                        <div class="form-control-wrap">
-                                                            <textarea class="form-control form-control-sm" id="comments" name="comments" placeholder="Enter comments if any"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Comments -->
                                                 <!-- Location -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -343,17 +333,29 @@ include 'include/session.php';
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <!-- Per Hour Rate -->
+                                                <!-- Hourly Rate -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="form-label" for="perHourRate">Per Hour Rate</label>
+                                                        <label class="form-label" for="perHourRate">Hourly Rate</label>
                                                         <div class="form-control-wrap">
-                                                            <input type="number" class="form-control" id="perHourRate" name="perHourRate" placeholder="5" required>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">£</span>
+                                                                </div>
+                                                                <input type="number" class="form-control" id="perHourRate" name="perHourRate" placeholder="50" required>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- Comments -->
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="comments">Comments</label>
+                                                        <div class="form-control-wrap">
+                                                            <textarea class="form-control form-control-sm" id="comments" name="comments" placeholder="Enter comments if any"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-lg btn-primary">Add Car</button>
@@ -382,17 +384,18 @@ include 'include/session.php';
     ?>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        $(document).on('keyup','#location',function(){
-            $( "#location" ).autocomplete({
-                source:function(request,response){
-                    $.post("autocomplete.php",{'name':$( "#location" ).val()}).done(function(data, status){
+        $(document).on('keyup', '#location', function() {
+            $("#location").autocomplete({
+                source: function(request, response) {
+                    $.post("autocomplete.php", {
+                        'name': $("#location").val()
+                    }).done(function(data, status) {
 
                         response(JSON.parse(data));
                     });
                 }
             });
         });
-
     </script>
 </body>
 

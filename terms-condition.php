@@ -35,7 +35,7 @@ include 'include/header-links.php';
                         </p>
                         <h6>2. Vehicle Reservation</h6>
                         <p data-aos="fade-down">
-                            You must be at least 18 years old to make a reservation.
+                            You must be at least 21 years old to make a reservation.
                             A valid driver's license and credit card are required at the time of rental.
                             Reservation changes or cancellations must be made within 2 weeks of booking.
                         </p>

@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 include 'config/connection.php';
 include 'include/session.php';
 
@@ -30,100 +30,16 @@ if (isset($_POST['bookCar'])){
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Dreams Rent</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="shortcut icon" href="assets/img/favicon.png">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="assets/plugins/aos/aos.css">
-    <link rel="stylesheet" href="assets/css/feather.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/design.css">
-    <link rel="stylesheet" href="common-class.css">
-</head>
+<?php
+include 'include/header-links.php';
+?>
 
 <body>
     <div class="main-wrapper">
-        <header class="header">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-lg header-nav">
-                    <div class="navbar-header">
-                        <a id="mobile_btn" href="javascript:void(0);">
-                            <span class="bar-icon">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
-                        </a>
-                        <a href="index.php" class="navbar-brand logo">
-                            <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                        </a>
-                        <a href="index.php" class="navbar-brand logo-small">
-                            <img src="assets/img/logo-small.png" class="img-fluid" alt="Logo">
-                        </a>
-                    </div>
-                    <div class="main-menu-wrapper">
-                        <div class="menu-header">
-                            <a href="index.php" class="menu-logo">
-                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                            </a>
-                            <a id="menu_close" class="menu-close" href="javascript:void(0);"> <i class="fas fa-times"></i></a>
-                        </div>
-                        <ul class="main-nav">
-                            <li class="active"><a href="index.php">Home</a></li>
-                            <li><a href="about-us.php">About Us</a></li>
-                            <li><a href="car-listing.php">Rent A Car</a></li>
-                            <li><a href="contact-us.php">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <!-- <ul class="nav header-navbar-rht">
-                        <li class="nav-item dropdown">
-                            <label class="welcome-user cursor-pointer" for="dropdown-toggle">
-                                <span><i class="fa-solid fa-circle-user fa-fw align-middle f-28"></i></span>Welcome User <i class="fas fa-angle-down align-middle ml-10"></i>
-                            </label>
-                            <input type="checkbox" id="dropdown-toggle" class="toggle-input">
-                            <ul class="submenu">
-                                <li><a href="invoice-details.php">My Profile</a></li>
-                                <li><a href="invoice-details.php">My Bookings</a></li>
-                                <li><a href="invoice-details.php">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul> -->
-                    <?php if(!isset($_SESSION['driver_id'])) {?>
-                        <ul class="nav header-navbar-rht">
-                            <li class="nav-item">
-                                <a class="nav-link header-login" href="login.php"><span><i class="fa-regular fa-user"></i></span>Sign In</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link header-reg" href="register.php"><span><i class="fa-solid fa-lock"></i></span>Sign Up</a>
-                            </li>
-                        </ul>
-                    <?php } else { ?>
-                        <ul class="nav header-navbar-rht">
-                            <li class="nav-item dropdown">
-                                <label class="welcome-user cursor-pointer" for="dropdown-toggle">
-                                    <span><i class="fa-solid fa-circle-user fa-fw align-middle f-28"></i></span>Welcome <?php echo $_SESSION['fullname']; ?> <i class="fas fa-angle-down align-middle ml-10"></i>
-                                </label>
-                                <input type="checkbox" id="dropdown-toggle" class="toggle-input">
-                                <ul class="submenu">
-                                    <li><a href="my-account.php">My Profile</a></li>
-                                    <li><a href="booking.php">My Bookings</a></li>
-                                    <li><a href="logout.php">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    <?php } ?>
-                </nav>
-            </div>
-        </header>
-
+        <?php
+        include 'include/header.php';
+        ?>
+        <!-- banner section -->
         <section class="banner-section banner-slider">
             <div class="container">
                 <div class="home-banner">
@@ -150,6 +66,7 @@ if (isset($_POST['bookCar'])){
             </div>
         </section>
 
+        <!-- car search section -->
         <div class="section-search">
             <div class="container">
                 <div class="search-box-banner">
@@ -222,6 +139,7 @@ if (isset($_POST['bookCar'])){
             </div>
         </div>
 
+        <!-- how it workds section -->
         <section class="section services">
             <div class="service-right">
                 <img src="assets/img/bg/service-right.svg" class="img-fluid" alt="services right">
@@ -286,6 +204,7 @@ if (isset($_POST['bookCar'])){
             </div>
         </section>
 
+        <!-- popular cars section -->
         <section class="section popular-services popular-explore">
             <div class="container">
 
@@ -307,10 +226,10 @@ if (isset($_POST['bookCar'])){
                                     </a>
                                 </li>
                                 <?php
-                                    # Prepare the SELECT Query
-                                    $sqlBrand = "SELECT * FROM car_brand";
-                                    $result = $conn->query($sqlBrand);
-                                    while ($row = $result->fetch_assoc()) {
+                                # Prepare the SELECT Query
+                                $sqlBrand = "SELECT * FROM car_brand";
+                                $result = $conn->query($sqlBrand);
+                                while ($row = $result->fetch_assoc()) {
                                 ?>
                                     <li>
                                         <a class="most-popular" data-bs-toggle="tab" data-value="<?php echo $row['brand_id']; ?>" data-bs-toggle="tab" href="#AllCars">
@@ -335,6 +254,7 @@ if (isset($_POST['bookCar'])){
             </div>
         </section>
 
+        <!-- popular car categories section -->
         <section class="section popular-car-type">
             <div class="container">
 
@@ -346,10 +266,10 @@ if (isset($_POST['bookCar'])){
                     <div class="popular-slider-group">
                         <div class="owl-carousel popular-cartype-slider owl-theme">
                             <?php
-                                # Prepare the SELECT Query
-                                $sqlCategory = "SELECT *, (SELECT COUNT(car_id) FROM car_details WHERE car_details.category_id = car_category.category_id GROUP BY category_id) AS car_count FROM car_category";
-                                $result = $conn->query($sqlCategory);
-                                while ($row = $result->fetch_assoc()) {
+                            # Prepare the SELECT Query
+                            $sqlCategory = "SELECT *, (SELECT COUNT(car_id) FROM car_details WHERE car_details.category_id = car_category.category_id GROUP BY category_id) AS car_count FROM car_category";
+                            $result = $conn->query($sqlCategory);
+                            while ($row = $result->fetch_assoc()) {
                             ?>
                                 <div class="listing-owl-item">
                                     <div class="listing-owl-group">
@@ -373,6 +293,7 @@ if (isset($_POST['bookCar'])){
             </div>
         </section>
 
+        <!-- facts by numbers section -->
         <section class="section facts-number">
             <div class="facts-left">
                 <img src="assets/img/bg/facts-left.png" class="img-fluid" alt="facts left">
@@ -449,6 +370,7 @@ if (isset($_POST['bookCar'])){
             </div>
         </section>
 
+        <!-- why coose us section -->
         <section class="section why-choose popular-explore">
             <div class="choose-left">
                 <img src="assets/img/bg/choose-left.png" class="img-fluid" alt="Why Choose Us">
@@ -508,6 +430,7 @@ if (isset($_POST['bookCar'])){
             </div>
         </section>
 
+        <!-- testimonials section -->
         <section class="section about-testimonial testimonials-section">
             <div class="container">
 
@@ -604,7 +527,7 @@ if (isset($_POST['bookCar'])){
                                     </div>
                                 </div>
                                 <p class="description">The user dashboard is fantastic! It kept me informed about my bookings and
-                                     made managing multiple reservations a breeze. Great job, Dreams Rent!</p>
+                                    made managing multiple reservations a breeze.</p>
                             </div>
                         </div>
                     </div>
@@ -666,7 +589,7 @@ if (isset($_POST['bookCar'])){
                                     </div>
                                 </div>
                                 <p class="description">Exceptional service! The safety features and cleanliness of the rented
-                                    car added an extra layer of satisfaction to my travel experience with Dreams Rent.</p>
+                                    car added an extra layer of satisfaction to my travel experience.</p>
                             </div>
                         </div>
                     </div>
@@ -675,160 +598,78 @@ if (isset($_POST['bookCar'])){
             </div>
         </section>
 
+        <!-- faq section -->
         <section class="section faq-section bg-light-primary">
             <div class="container">
-
                 <div class="section-heading" data-aos="fade-down">
                     <h2>Frequently Asked Questions </h2>
                 </div>
-
                 <div class="faq-info">
-                    <div class="faq-card bg-white" data-aos="fade-down">
-                        <h4 class="faq-title">
-                            <a class="collapsed" data-bs-toggle="collapse" href="#faqOne" aria-expanded="false">What do I need to book a car on Dreams Rent?</a>
-                        </h4>
-                        <div id="faqOne" class="card-collapse collapse">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
-                    </div>
-                    <div class="faq-card bg-white" data-aos="fade-down">
-                        <h4 class="faq-title">
-                            <a class="collapsed" data-bs-toggle="collapse" href="#faqTwo" aria-expanded="false">In which
-                                areas do you operate?</a>
-                        </h4>
-                        <div id="faqTwo" class="card-collapse collapse">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
-                    </div>
-                    <div class="faq-card bg-white" data-aos="fade-down">
-                        <h4 class="faq-title">
-                            <a class="collapsed" data-bs-toggle="collapse" href="#faqThree" aria-expanded="false">Do I need my own insurance?</a>
-                        </h4>
-                        <div id="faqThree" class="card-collapse collapse">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
-                    </div>
-                    <div class="faq-card bg-white" data-aos="fade-down">
-                        <h4 class="faq-title">
-                            <a class="collapsed" data-bs-toggle="collapse" href="#faqFour" aria-expanded="false">What is the cancellation policy on Dreams Rent?</a>
-                        </h4>
-                        <div id="faqFour" class="card-collapse collapse">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
-                    </div>
-                    <div class="faq-card bg-white" data-aos="fade-down">
-                        <h4 class="faq-title">
-                            <a class="collapsed" data-bs-toggle="collapse" href="#faqFive" aria-expanded="false">Can I get my car delivered to me?</a>
-                        </h4>
-                        <div id="faqFive" class="card-collapse collapse">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer">
-            <div class="footer-top aos" data-aos="fade-up">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6">
-
-                                    <div class="footer-widget footer-menu">
-                                        <h5 class="footer-title">About Company</h5>
-                                        <p>At Dreams Rent, we're committed to giving our cherished clients the
-                                            best possible automobile rental services. </p>
-                                    </div>
-
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="faq-card bg-white" data-aos="fade-down">
+                                <h4 class="faq-title">
+                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqOne" aria-expanded="false">What do I need to book a car on Dreams Rent?</a>
+                                </h4>
+                                <div id="faqOne" class="card-collapse collapse">
+                                    <p>To reserve a car on Dreams Rent in the UK, you must first register for an
+                                        account, have a valid driver's license, and be at least 21 years old.
+                                        You'll enter your driver's license and some additional information to go
+                                        through a brief approval procedure when you book your first trip. Most of
+                                        the time, you'll receive approval right away and be good to go for any
+                                        upcoming family vacations, business trips, and road trips!
+                                    </p>
                                 </div>
-                                <div class="col-lg-4 col-md-6">
-
-                                    <div class="footer-widget footer-menu">
-                                        <h5 class="footer-title">Vehicles Type</h5>
-                                        <ul>
-                                            <li>
-                                                <a href="car-list.php">All Vehicles</a>
-                                            </li>
-                                            <li>
-                                                <a href="car-list.php">Mazda</a>
-                                            </li>
-                                            <li>
-                                                <a href="car-list.php">Audi</a>
-                                            </li>
-                                            <li>
-                                                <a href="car-list.php">Honda</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
+                            </div>
+                            <div class="faq-card bg-white" data-aos="fade-down">
+                                <h4 class="faq-title">
+                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqThree" aria-expanded="false">Do I need my own insurance?</a>
+                                </h4>
+                                <div id="faqThree" class="card-collapse collapse">
+                                    <p>No, you can reserve a car on Dreams Rent without having to have personal insurance.</p>
                                 </div>
-                                <div class="col-lg-4 col-md-6">
-
-                                    <div class="footer-widget footer-menu">
-                                        <h5 class="footer-title">Quick links</h5>
-                                        <ul>
-                                            <li>
-                                                <a href="dashboard/sign-in.php" target="_blank">Admin Dashboard</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard/sign-in.php" target="_blank">Owner Dashboard</a>
-                                            </li>
-                                            <li>
-                                                <a href="terms-condition.php" target="_blank">Terms & Conditions</a>
-                                            </li>
-                                            <li>
-                                                <a href="privacy-policy.php" target="_blank">Privacy Policy</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
+                            </div>
+                            <div class="faq-card bg-white" data-aos="fade-down">
+                                <h4 class="faq-title">
+                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqFour" aria-expanded="false">Do I need a UK license to drive in the UK?</a>
+                                </h4>
+                                <div id="faqFour" class="card-collapse collapse">
+                                    <p>No, a UK driver's license is not required to rent a car in the UK. However,
+                                        you must require a current driver's license, as the majority of foreign
+                                        licenses are recognized in the US, Canada, Australia, and the UK.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5">
-                            <div class="footer-contact footer-widget">
-                                <h5 class="footer-title">Contact Info</h5>
-                                <div class="footer-contact-info">
-                                    <div class="footer-address">
-                                        <span><i class="feather-phone-call"></i></span>
-                                        <div class="addr-info">
-                                            <a href="tel:+1(888)7601940">+ 1 (888) 760 1940</a>
-                                        </div>
-                                    </div>
-                                    <div class="footer-address">
-                                        <span><i class="feather-mail"></i></span>
-                                        <div class="addr-info">
-                                            <a href="mailto:support@example.com">support@dreamsrent.com</a>
-                                        </div>
-                                    </div>
+                        <div class="col-lg-6">
+                            <div class="faq-card bg-white" data-aos="fade-down">
+                                <h4 class="faq-title">
+                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqFive" aria-expanded="false">Can I get my car delivered to me?</a>
+                                </h4>
+                                <div id="faqFive" class="card-collapse collapse">
+                                    <p>Indeed, a lot of car owners do offer delivery to specific delivery places or to
+                                        travel hubs like hotels, train stations, and airports. To save time and
+                                        effort, you can have your car delivered to your hotel or vacation rental;
+                                        alternatively, you can find cars on Dreams Rent close to hundreds of airports.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="copyright">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <div class="copyright-text">
-                                    <p>© <script>
-                                            document.write(new Date().getFullYear())
-                                        </script> Dreams Rent. All Rights Reserved.
+                            <div class="faq-card bg-white" data-aos="fade-down">
+                                <h4 class="faq-title">
+                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqSix" aria-expanded="false">Do I need a credit card to rent a car?</a>
+                                </h4>
+                                <div id="faqSix" class="card-collapse collapse">
+                                    <p>To pick up a rental car, you must have a working credit card. This needs to
+                                        be in the primary driver's name, cannot be a debit or credit card that has
+                                        been pre-paid, and needs to have enough money on hand.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="faq-card bg-white" data-aos="fade-down">
+                                <h4 class="faq-title">
+                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqSeven" aria-expanded="false">Can I cancel my reservation?</a>
+                                </h4>
+                                <div id="faqSeven" class="card-collapse collapse">
+                                    <p>Certainly! By signing into your account on our website and going to the
+                                        "My Account -> Bookings" section, you can cancel your reservation.
                                     </p>
                                 </div>
                             </div>
@@ -836,34 +677,23 @@ if (isset($_POST['bookCar'])){
                     </div>
                 </div>
             </div>
-        </footer>
+        </section>
+
+        <?php
+        include 'include/footer.php';
+        ?>
     </div>
 
-    <div class="progress-wrap active-progress">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;">
-            </path>
-        </svg>
-    </div>
-
-    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="assets/js/jquery-3.6.4.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/jquery.waypoints.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/plugins/select2/js/select2.min.js"></script>
-    <script src="assets/plugins/aos/aos.js"></script>
-    <script src="assets/js/backToTop.js"></script>
-    <script src="assets/plugins/moment/moment.min.js"></script>
-    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/script.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <?php
+    include 'include/footer-scripts.php';
+    ?>
     <script>
-        $(document).on('keyup','#pickup_city',function(){
-            $( "#pickup_city" ).autocomplete({
-                source:function(request,response){
-                    $.post("autocomplete.php",{'name':$( "#pickup_city" ).val()}).done(function(data, status){
+        $(document).on('keyup', '#pickup_city', function() {
+            $("#pickup_city").autocomplete({
+                source: function(request, response) {
+                    $.post("autocomplete.php", {
+                        'name': $("#pickup_city").val()
+                    }).done(function(data, status) {
 
                         response(JSON.parse(data));
                     });
@@ -871,10 +701,12 @@ if (isset($_POST['bookCar'])){
             });
         });
 
-        $(document).on('keyup','#dropoff_city',function(){
-            $( "#dropoff_city" ).autocomplete({
-                source:function(request,response){
-                    $.post("autocomplete.php",{'name':$( "#dropoff_city" ).val()}).done(function(data, status){
+        $(document).on('keyup', '#dropoff_city', function() {
+            $("#dropoff_city").autocomplete({
+                source: function(request, response) {
+                    $.post("autocomplete.php", {
+                        'name': $("#dropoff_city").val()
+                    }).done(function(data, status) {
 
                         response(JSON.parse(data));
                     });

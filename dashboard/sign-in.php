@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
             $_SESSION['username'] = $row['username'];
             $_SESSION['fullname'] = $row['full_name'];
             $_SESSION['roletype'] = $row['role_type'];
-            if ($row['role_type'] == 'owner'){
+            if ($row['role_type'] == 'owner') {
                 $user_id = $row['user_id'];
                 $sqlOwner = "SELECT * FROM `owners` where user_id = '$user_id'";
                 $resultOwner = $conn->query($sqlOwner);
@@ -55,6 +55,7 @@ if (isset($_POST['login'])) {
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="assets/css/dashlite.css?ver=3.2.2">
     <link id="skin-default" rel="stylesheet" href="assets/css/theme.css?ver=3.2.2">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/fontawesome-icons.css">
 </head>
 
 <body class="nk-body bg-white npc-general pg-auth">
@@ -81,16 +82,17 @@ if (isset($_POST['login'])) {
                                             <label class="form-label" for="uname">Username</label>
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input type="text" class="form-control form-control-lg" id="uname" name="uname" placeholder="Enter your username" required>
+                                            <input type="text" class="form-control form-control-lg" id="uname" name="uname" placeholder="Enter your username" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-label-group">
                                             <label class="form-label" for="password">Password</label>
-                                             <a class="link link-primary link-sm" href="forgot-password.php">Forgot Password?</a>
+                                            <a class="link link-primary link-sm" href="forgot-password.php">Forgot Password?</a>
                                         </div>
-                                        <div class="form-control-wrap">
+                                        <div class="form-control-wrap pass-group">
                                             <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password" required>
+                                            <div class="form-icon form-icon-right toggle-password"><span class="fas fa-eye"></span></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -102,35 +104,49 @@ if (isset($_POST['login'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="nk-footer nk-auth-footer-full">
-                        <div class="container wide-lg">
-                            <div class="row g-3">
-                                <div class="col-lg-6 order-lg-last">
-                                    <ul class="nav nav-sm justify-content-center justify-content-lg-end">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="terms-and-conditions.php">Terms & Condition</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="privacy-policy.php">Privacy Policy</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="nk-block-content text-center text-lg-start">
-                                        <p class="text-soft">Copyright &copy;
-                                            <script>
-                                                document.write(new Date().getFullYear())
-                                            </script> Dreams Rent. All Rights Reserved
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+            </div>
+        </div>
+        <footer class="nk-footer">
+            <div class="container wide-lg">
+                <div class="row g-3">
+                    <div class="col-lg-6 order-lg-last">
+                        <ul class="nav nav-sm justify-content-center justify-content-lg-end">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../terms-and-conditions.php">Terms & Condition</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../privacy-policy.php">Privacy Policy</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="nk-block-content text-center text-lg-start">
+                            <p class="text-soft">Copyright &copy;
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> Dreams Rent. All Rights Reserved
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
+    <script>
+        var passwordInput = document.getElementById('password');
+        var togglePassword = document.querySelector('.toggle-password');
+
+        togglePassword.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePassword.innerHTML = '<span class="fas fa-eye-slash"></span>';
+            } else {
+                passwordInput.type = 'password';
+                togglePassword.innerHTML = '<span class="fas fa-eye"></span>';
+            }
+        });
+    </script>
     <script src="assets/js/bundle.js?ver=3.2.2"></script>
     <script src="assets/js/scripts.js?ver=3.2.2"></script>
 </body>
