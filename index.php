@@ -3,6 +3,29 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 include 'config/connection.php';
 include 'include/session.php';
+
+if (isset($_POST['bookCar'])){
+
+    $serialize['pickup_city'] = $_POST['pickup_city'];
+    $serialize['pickup_date'] = $_POST['pickup_date'];
+    $serialize['pickup_time'] = $_POST['pickup_time'];
+    $serialize['dropoff_city'] = $_POST['dropoff_city'];
+    $serialize['dropoff_date'] = $_POST['dropoff_date'];
+    $serialize['dropoff_time'] = $_POST['dropoff_time'];
+
+    $bookingDetails = serialize($serialize);
+
+    mt_srand(100);
+    $temporary_id = mt_rand();
+
+    $sqlTemporaryBooking = "INSERT INTO  temporary_booking";
+    $sqlUser = "INSERT INTO `temporary_booking`(`temporary_id`,`booking_details`) 
+        VALUES ('$temporary_id','$bookingDetails')";
+    if ($conn->query($sqlUser) == TRUE){
+        setcookie('booking_id', $temporary_id, time() + 86400 * 14);
+        echo "<script> location.href='car-listing.php'; </script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +79,7 @@ include 'include/session.php';
                         <ul class="main-nav">
                             <li class="active"><a href="index.php">Home</a></li>
                             <li><a href="about-us.php">About Us</a></li>
-                            <li><a href="listing-grid.php">Rent A Car</a></li>
+                            <li><a href="car-listing.php">Rent A Car</a></li>
                             <li><a href="contact-us.php">Contact Us</a></li>
                         </ul>
                     </div>
@@ -113,7 +136,7 @@ include 'include/session.php';
                             </h1>
                             <p>Explore the Road Ahead with Dreams Rent: Your Gateway to Convenient and Affordable Car Rentals in the Heart of the City.</p>
                             <div class="view-all">
-                                <a href="listing-grid.php" class="btn btn-view d-inline-flex align-items-center">View
+                                <a href="car-listing.php" class="btn btn-view d-inline-flex align-items-center">View
                                     all Cars <span><i class="feather-arrow-right ms-2"></i></span></a>
                             </div>
                         </div>
@@ -130,7 +153,7 @@ include 'include/session.php';
         <div class="section-search">
             <div class="container">
                 <div class="search-box-banner">
-                    <form action="listing-grid.php">
+                    <form method="post">
                         <ul class="align-items-center mb-30">
                             <li class="column-group-main">
                                 <div class="form-group">
@@ -290,7 +313,7 @@ include 'include/session.php';
                                     while ($row = $result->fetch_assoc()) {
                                 ?>
                                     <li>
-                                        <a class="most-popular" data-bs-toggle="tab" data-value="<?php echo $row['brand_name']; ?>">
+                                        <a class="most-popular" data-bs-toggle="tab" data-value="<?php echo $row['brand_id']; ?>" data-bs-toggle="tab" href="#AllCars">
                                             <span>
                                                 <img src="dashboard/assets/images/brand/<?php echo $row['image']; ?>" alt="<?php echo $row['brand_name']; ?>">
                                             </span>
@@ -304,79 +327,8 @@ include 'include/session.php';
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane active" id="AllCars">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12" data-aos="fade-down">
-                                <div class="listing-item">
-                                    <div class="listing-img">
-                                        <a href="listing-details.php">
-                                            <img src="assets/img/cars/car-08.jpg" class="img-fluid" alt="Toyota">
-                                        </a>
-                                        <div class="fav-item">
-                                            <span class="featured-text">Toyota</span>
-                                            <a href="javascript:void(0)" class="fav-icon">
-                                                <i class="feather-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="listing-content">
-                                        <div class="listing-features">
-                                            <a href="javascript:void(0)" class="author-img">
-                                                <img src="assets/img/profiles/avatar-08.jpg" alt="author">
-                                            </a>
-                                            <h3 class="listing-title">
-                                                <a href="listing-details.php">Toyota Tacoma 4WD</a>
-                                            </h3>
-                                            <div class="list-rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <span>(5.0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="listing-details-group">
-                                            <ul>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-01.svg" alt="Auto"></span>
-                                                    <p>Auto</p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-02.svg" alt="22 miles"></span>
-                                                    <p>22 miles</p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-03.svg" alt="Diesel"></span>
-                                                    <p>Diesel</p>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-04.svg" alt="Power"></span>
-                                                    <p>Power</p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-05.svg" alt="2019"></span>
-                                                    <p>2019</p>
-                                                </li>
-                                                <li>
-                                                    <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                    <p>5 Persons</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="listing-location-details">
+                        <div class="row show-car">
 
-                                            <div class="listing-price">
-                                                <h6>£30 <span>/ Day</span></h6>
-                                            </div>
-                                        </div>
-                                        <div class="listing-button">
-                                            <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -402,7 +354,7 @@ include 'include/session.php';
                                 <div class="listing-owl-item">
                                     <div class="listing-owl-group">
                                         <div class="listing-owl-img">
-                                            <img src="assets/img/cars/mp-vehicle-01.png" class="img-fluid" alt="Popular Cartypes">
+                                            <img src="assets/img/cars/<?php echo $row['image']; ?>" class="img-fluid" alt="Popular Cartypes">
                                         </div>
                                         <h6><?php echo $row['category_name']; ?></h6>
                                         <p><?php echo isset($row['car_count']) ? $row['car_count'] : '0' ?> Cars</p>
@@ -414,7 +366,7 @@ include 'include/session.php';
                 </div>
 
                 <div class="view-all text-center" data-aos="fade-down">
-                    <a href="listing-grid.php" class="btn btn-view d-inline-flex align-items-center">View all Cars
+                    <a href="car-listing.php" class="btn btn-view d-inline-flex align-items-center">View all Cars
                         <span><i class="feather-arrow-right ms-2"></i></span></a>
                 </div>
 
@@ -433,7 +385,11 @@ include 'include/session.php';
                 <div class="section-heading" data-aos="fade-down">
                     <h2 class="title text-white">Facts By The Numbers</h2>
                 </div>
-
+                <?php
+                    $sqlCounts = "SELECT COUNT(driver_id) as driver_count, (SELECT COUNT(booking_id) FROM bookings) as booking_count, (SELECT COUNT(car_id) FROM car_details) as car_count, (SELECT COUNT(owner_id) FROM owners) as owner_count FROM drivers";
+                    $resultCounts = $conn->query($sqlCounts);
+                    $rowCounts = $resultCounts->fetch_assoc();
+                ?>
                 <div class="counter-group">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-12 d-flex" data-aos="fade-down">
@@ -443,7 +399,7 @@ include 'include/session.php';
                                         <img src="assets/img/icons/bx-heart.svg" alt>
                                     </div>
                                     <div class="count-content">
-                                        <h4><span class="counterUp">16</span>K+</h4>
+                                        <h4><span class=""><?php echo $rowCounts['driver_count']; ?></span></h4>
                                         <p>Happy Customers</p>
                                     </div>
                                 </div>
@@ -456,7 +412,7 @@ include 'include/session.php';
                                         <img src="assets/img/icons/orders.png" alt>
                                     </div>
                                     <div class="count-content">
-                                        <h4><span class="counterUp">20</span>K+</h4>
+                                        <h4><span class=""><?php echo $rowCounts['booking_count']; ?></span></h4>
                                         <p>Completed Bookings</p>
                                     </div>
                                 </div>
@@ -469,7 +425,7 @@ include 'include/session.php';
                                         <img src="assets/img/icons/bx-car.svg" alt>
                                     </div>
                                     <div class="count-content">
-                                        <h4><span class="counterUp">100</span>+</h4>
+                                        <h4><span class=""><?php echo $rowCounts['car_count']; ?></span></h4>
                                         <p>Count of Cars</p>
                                     </div>
                                 </div>
@@ -482,7 +438,7 @@ include 'include/session.php';
                                         <img src="assets/img/icons/car-owner.png" alt>
                                     </div>
                                     <div class="count-content">
-                                        <h4><span class="counterUp">80</span>+</h4>
+                                        <h4><span class=""><?php echo $rowCounts['owner_count']; ?></span></h4>
                                         <p>Car Owners</p>
                                     </div>
                                 </div>
@@ -925,9 +881,27 @@ include 'include/session.php';
                 }
             });
         });
-        $(".most-popular").click(function () {
-            var type = $(this).data('value');
+        $(document).ready(function () {
+            getPopularCar('all');
+
+            $(".most-popular").click(function () {
+                getPopularCar($(this).data('value'));
+            })
+            function getPopularCar(type) {
+                type = type ?? 'all';
+                $.ajax({
+                    url: "fetch-popular-car.php",
+                    method: "POST",
+                    data: {
+                        type: type
+                    },
+                    success: function (data) {
+                        $('.show-car').html(data);
+                    }
+                });
+            }
         })
+
     </script>
 </body>
 

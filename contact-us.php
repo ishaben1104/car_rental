@@ -1,3 +1,28 @@
+<?php
+include 'config/connection.php';
+include 'include/session.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //Retrieve form data
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $contact_no = $_POST["phone"];
+    $comment = $_POST["comments"];
+
+    //SQL query to inser data into the database
+    $sqlUser = "INSERT INTO `inquiries`(`name`, `email`, `contact_no`, `comments`) 
+        VALUES ('$name','$email', '$contact_no', '$comment')";
+    //Execute the query
+    if ($conn->query($sqlUser) === TRUE) {
+        echo "<h3>Inquiry sent successfully!</h3>";
+        echo "<script> location.href='contact-us.php'; </script>";
+    } else {
+        echo "Error: " . $sqlUser . "<br>" . $conn->error;
+        die;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +79,7 @@ include 'include/header-links.php';
                         <img src="assets/img/contact-info.jpg" class="img-fluid" alt="Contact">
                     </div>
                     <div class="col-lg-6">
-                        <form action="#">
+                        <form method="post">
                             <div class="row">
                                 <h1>Get in touch!</h1>
                                 <div class="col-md-12">
@@ -78,12 +103,11 @@ include 'include/header-links.php';
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Comments <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" rows="4" cols="50" id="comments" name="comments" placeholder="Enter your comments" required>
-											</textarea>
+                                        <textarea class="form-control" rows="4" cols="50" id="comments" name="comments" placeholder="Enter your comments" required></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn contact-btn">Send Enquiry</button>
+                            <button type="submit" name="sendInquiry" class="btn contact-btn">Send Enquiry</button>
                         </form>
                     </div>
                 </div>

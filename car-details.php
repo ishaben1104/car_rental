@@ -1,3 +1,14 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+include 'config/connection.php';
+
+    $car_id = $_GET['id'];
+    # Prepare the SELECT Query
+    $sqlCarDetails = "SELECT cd.*, cb.brand_name, cb.brand_id, cc.category_id, cc.category_name FROM car_details as cd LEFT JOIN car_brand as cb ON cd.brand_id = cb.brand_id LEFT JOIN car_category as cc ON cc.category_id = cd.category_id WHERE car_id = '$car_id'";
+    $resultCarDetails = $conn->query($sqlCarDetails);
+    $rowCarDetails = $resultCarDetails->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -14,12 +25,12 @@ include 'include/header-links.php';
             <div class="container">
                 <div class="row align-items-center text-center">
                     <div class="col-md-12 col-12">
-                        <h2 class="breadcrumb-title">Chevrolet Camaro</h2>
+                        <h2 class="breadcrumb-title"><?php echo $rowCarDetails['car_name']; ?></h2>
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript:void(0);">Listings</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Chevrolet Camaro</li>
+                                <li class="breadcrumb-item active" aria-current="page"><?php echo $rowCarDetails['car_name']; ?></li>
                             </ol>
                         </nav>
                     </div>
@@ -33,7 +44,7 @@ include 'include/header-links.php';
                     <div class="detail-headings">
                         <div class="star-rated">
                             <div class="list-rating">
-                                <span class="year">2023</span>
+                                <span class="year"><?php echo $rowCarDetails['vehicle_model']; ?></span>
                                 <i class="fas fa-star filled"></i>
                                 <i class="fas fa-star filled"></i>
                                 <i class="fas fa-star filled"></i>
@@ -42,23 +53,15 @@ include 'include/header-links.php';
                                 <span class="d-inline-block average-list-rating"> 5.0 </span>
                             </div>
                             <div class="camaro-info">
-                                <h3>Chevrolet Camaro</h3>
+                                <h3><?php echo $rowCarDetails['car_name']; ?></h3>
                                 <div class="camaro-location">
                                     <div class="camaro-location-inner">
                                         <i class="feather-map-pin me-2"></i>
-                                        <span class="me-2"> <b>Location :</b> Miami St, Destin, FL 32550, USA </span>
-                                    </div>
-                                    <div class="camaro-locations-inner">
-                                        <i class="feather-eye me-2"></i>
-                                        <span><b>Views :</b> 250 </span>
+                                        <span class="me-2"> <b>Location :</b> <?php echo $rowCarDetails['location']; ?> </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="details-btn">
-                        <a href> <img src="assets/img/git-compare.svg" alt> Compare</a>
-                        <a href><i class="feather-heart"></i> Wishlist</a>
                     </div>
                 </div>
             </div>
@@ -71,27 +74,8 @@ include 'include/header-links.php';
                         <div class="detail-product">
                             <div class="slider detail-bigimg">
                                 <div class="product-img">
-                                    <img src="assets/img/cars/slider-01.jpg" alt="Slider">
+                                    <img src="dashboard/assets/images/car/<?php echo $rowCarDetails['image']; ?>" alt="Slider">
                                 </div>
-                                <div class="product-img">
-                                    <img src="assets/img/cars/slider-02.jpg" alt="Slider">
-                                </div>
-                                <div class="product-img">
-                                    <img src="assets/img/cars/slider-03.jpg" alt="Slider">
-                                </div>
-                                <div class="product-img">
-                                    <img src="assets/img/cars/slider-04.jpg" alt="Slider">
-                                </div>
-                                <div class="product-img">
-                                    <img src="assets/img/cars/slider-05.jpg" alt="Slider">
-                                </div>
-                            </div>
-                            <div class="slider slider-nav-thumbnails">
-                                <div><img src="assets/img/cars/slider-thum-01.jpg" alt="product image"></div>
-                                <div><img src="assets/img/cars/slider-thum-02.jpg" alt="product image"></div>
-                                <div><img src="assets/img/cars/slider-thum-03.jpg" alt="product image"></div>
-                                <div><img src="assets/img/cars/slider-thum-04.jpg" alt="product image"></div>
-                                <div><img src="assets/img/cars/slider-thum-05.jpg" alt="product image"></div>
                             </div>
                         </div>
                         <div class="review-sec extra-service">
@@ -114,7 +98,7 @@ include 'include/header-links.php';
                                             </div>
                                             <div class="featues-info">
                                                 <span>Body </span>
-                                                <h6> Sedan</h6>
+                                                <h6> <?php echo $rowCarDetails['category_name']; ?></h6>
                                             </div>
                                         </div>
                                         <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
@@ -123,7 +107,7 @@ include 'include/header-links.php';
                                             </div>
                                             <div class="featues-info">
                                                 <span>Make </span>
-                                                <h6> Nisssan</h6>
+                                                <h6> <?php echo $rowCarDetails['brand_name']; ?></h6>
                                             </div>
                                         </div>
                                         <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
@@ -132,7 +116,7 @@ include 'include/header-links.php';
                                             </div>
                                             <div class="featues-info">
                                                 <span>Transmission </span>
-                                                <h6> Automatic</h6>
+                                                <h6> <?php echo $rowCarDetails['transmission']; ?></h6>
                                             </div>
                                         </div>
                                         <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
@@ -141,7 +125,7 @@ include 'include/header-links.php';
                                             </div>
                                             <div class="featues-info">
                                                 <span>Fuel Type </span>
-                                                <h6> Diesel</h6>
+                                                <h6> <?php echo $rowCarDetails['fuel_type']; ?></h6>
                                             </div>
                                         </div>
                                         <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
@@ -150,16 +134,7 @@ include 'include/header-links.php';
                                             </div>
                                             <div class="featues-info">
                                                 <span>Mileage </span>
-                                                <h6>16 Km</h6>
-                                            </div>
-                                        </div>
-                                        <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
-                                            <div class="feature-img">
-                                                <img src="assets/img/specification/specification-icon-6.svg" alt>
-                                            </div>
-                                            <div class="featues-info">
-                                                <span>Drivetrian </span>
-                                                <h6>Front Wheel</h6>
+                                                <h6><?php echo $rowCarDetails['mileage']; ?> Km</h6>
                                             </div>
                                         </div>
                                         <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
@@ -168,52 +143,7 @@ include 'include/header-links.php';
                                             </div>
                                             <div class="featues-info">
                                                 <span>Year</span>
-                                                <h6> 2018</h6>
-                                            </div>
-                                        </div>
-                                        <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
-                                            <div class="feature-img">
-                                                <img src="assets/img/specification/specification-icon-8.svg" alt>
-                                            </div>
-                                            <div class="featues-info">
-                                                <span>AC </span>
-                                                <h6> Air Condition</h6>
-                                            </div>
-                                        </div>
-                                        <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
-                                            <div class="feature-img">
-                                                <img src="assets/img/specification/specification-icon-9.svg" alt>
-                                            </div>
-                                            <div class="featues-info">
-                                                <span>VIN </span>
-                                                <h6> 45456444</h6>
-                                            </div>
-                                        </div>
-                                        <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
-                                            <div class="feature-img">
-                                                <img src="assets/img/specification/specification-icon-10.svg" alt>
-                                            </div>
-                                            <div class="featues-info">
-                                                <span>Door </span>
-                                                <h6> 4 Doors</h6>
-                                            </div>
-                                        </div>
-                                        <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
-                                            <div class="feature-img">
-                                                <img src="assets/img/specification/specification-icon-11.svg" alt>
-                                            </div>
-                                            <div class="featues-info">
-                                                <span>Brake </span>
-                                                <h6> ABS</h6>
-                                            </div>
-                                        </div>
-                                        <div class="featureslist d-flex align-items-center col-lg-3 col-md-4">
-                                            <div class="feature-img">
-                                                <img src="assets/img/specification/specification-icon-12.svg" alt>
-                                            </div>
-                                            <div class="featues-info">
-                                                <span>Engine (Hp) </span>
-                                                <h6> 3,000</h6>
+                                                <h6> <?php echo $rowCarDetails['vehicle_model']; ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -251,39 +181,6 @@ include 'include/header-links.php';
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="review-sec extra-service mb-0">
-                            <div class="review-header">
-                                <h4>Description of Listing</h4>
-                            </div>
-                            <div class="description-list">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                    book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                </p>
-                                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                                    desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.It was popularised in the 1960s with the
-                                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                                    PageMaker including versions of Lorem Ipsum.
-                                </p>
-                                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                                    desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                </p>
-                                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                                    desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.It was popularised in the 1960s with the
-                                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                                    PageMaker including versions of Lorem Ipsum.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="review-sec extra-service mb-0">
-                            <div class="review-header">
-                                <h4>Video</h4>
-                            </div>
-                            <div class="short-video">
-                                <iframe src="https://www.youtube.com/embed/ExJZAegsOis" width="100" height="350"></iframe>
                             </div>
                         </div>
                         <div class="review-sec listing-review">
@@ -437,48 +334,6 @@ include 'include/header-links.php';
                             <div class="review-header">
                                 <h4>Leave a Reply</h4>
                             </div>
-                            <ul class="review-list-rating mb-3">
-                                <li>
-                                    quality
-                                    <p>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                    </p>
-                                </li>
-                                <li>
-                                    Price
-                                    <p>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                    </p>
-                                </li>
-                                <li>
-                                    Comfort
-                                    <p>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                    </p>
-                                </li>
-                                <li>
-                                    Driving
-                                    <p>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                    </p>
-                                </li>
-                            </ul>
                             <div class="card-body">
                                 <div class="review-list">
                                     <ul>
@@ -654,609 +509,6 @@ include 'include/header-links.php';
                             </div>
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.7475515416095!2d-0.08046172431747409!3d51.517847309941324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761cb3a11fde55%3A0x9e5f734778f9e989!2sNorthumbria%20University%20-%20London!5e0!3m2!1sen!2suk!4v1701425598351!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6509170.989457427!2d-123.80081967108484!3d37.192957227641294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2sin!4v1669181581381!5m2!1sen!2sin" class="iframe-video"></iframe> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="details-car-grid">
-                            <div class="details-slider-heading">
-                                <h3>You May be Interested in</h3>
-                            </div>
-                            <div class="car-details-slider owl-carousel">
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-02.jpg" class="img-fluid" alt="KIA">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">KIA</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-02.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">Kia Soul 2016</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Auto"></span>
-                                                        <p>Auto</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="22 KM"></span>
-                                                        <p>22 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Petrol"></span>
-                                                        <p>Petrol</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Diesel"></span>
-                                                        <p>Diesel</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2016"></span>
-                                                        <p>2016</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>5 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span class="me-2"><i class="feather-map-pin"></i></span> Belgium
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$80 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-07.jpg" class="img-fluid" alt="Audi">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">Chevrolet</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-07.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">Chevrolet Pick Truck 3.5L</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Manual"></span>
-                                                        <p>Manual</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="10 KM"></span>
-                                                        <p>10 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Petrol"></span>
-                                                        <p>Petrol</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Power"></span>
-                                                        <p>Power</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2012"></span>
-                                                        <p>2012</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>5 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span><i class="feather-map-pin"></i></span> Spain
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$77 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-03.jpg" class="img-fluid" alt="Audi">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">Audi</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-03.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">Audi A3 2019 new</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Manual"></span>
-                                                        <p>Manual</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="10 KM"></span>
-                                                        <p>10 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Petrol"></span>
-                                                        <p>Petrol</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Power"></span>
-                                                        <p>Power</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2019"></span>
-                                                        <p>2019</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>4 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span><i class="feather-map-pin"></i></span> Newyork, USA
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$45 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-04.jpg" class="img-fluid" alt="Audi">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">Ferrai</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-04.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">Ferrari 458 MM Speciale</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Manual"></span>
-                                                        <p>Manual</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="14 KM"></span>
-                                                        <p>14 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Diesel"></span>
-                                                        <p>Diesel</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Basic"></span>
-                                                        <p>Basic</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2022"></span>
-                                                        <p>2022</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>5 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span><i class="feather-map-pin"></i></span> Newyork, USA
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$160 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-05.jpg" class="img-fluid" alt="Audi">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">Chevrolet</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">2018 Chevrolet Camaro</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Manual"></span>
-                                                        <p>Manual</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="18 KM"></span>
-                                                        <p>18 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Diesel"></span>
-                                                        <p>Diesel</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Power"></span>
-                                                        <p>Power</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2018"></span>
-                                                        <p>2018</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>4 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span><i class="feather-map-pin"></i></span> Germany
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$36 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-06.jpg" class="img-fluid" alt="Audi">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">Acura</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-06.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">Acura Sport Version</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Auto"></span>
-                                                        <p>Auto</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="12 KM"></span>
-                                                        <p>12 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Diesel"></span>
-                                                        <p>Diesel</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Power"></span>
-                                                        <p>Power</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2013"></span>
-                                                        <p>2013</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>5 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span><i class="feather-map-pin"></i></span> Newyork, USA
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$30 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-02.jpg" class="img-fluid" alt="KIA">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">KIA</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-02.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">Kia Soul 2016</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Auto"></span>
-                                                        <p>Auto</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="22 KM"></span>
-                                                        <p>22 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Petrol"></span>
-                                                        <p>Petrol</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Diesel"></span>
-                                                        <p>Diesel</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2016"></span>
-                                                        <p>2016</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>5 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span><i class="feather-map-pin"></i></span> Belgium
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$80 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="listing-item pb-0">
-                                        <div class="listing-img">
-                                            <a href="listing-details.php">
-                                                <img src="assets/img/cars/car-05.jpg" class="img-fluid" alt="Audi">
-                                            </a>
-                                            <div class="fav-item">
-                                                <span class="featured-text">Chevrolet</span>
-                                                <a href="javascript:void(0)" class="fav-icon">
-                                                    <i class="feather-heart"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="listing-content">
-                                            <div class="listing-features">
-                                                <div class="author-img">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="author">
-                                                </div>
-                                                <h3 class="listing-title">
-                                                    <a href="javascript:void(0)">2018 Chevrolet Camaro</a>
-                                                </h3>
-                                                <div class="list-rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <span>(5.0)</span>
-                                                </div>
-                                            </div>
-                                            <div class="listing-details-group">
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="Manual"></span>
-                                                        <p>Manual</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-02.svg" alt="18 KM"></span>
-                                                        <p>18 KM</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-03.svg" alt="Diesel"></span>
-                                                        <p>Diesel</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-04.svg" alt="Power"></span>
-                                                        <p>Power</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-05.svg" alt="2018"></span>
-                                                        <p>2018</p>
-                                                    </li>
-                                                    <li>
-                                                        <span><img src="assets/img/icons/car-parts-06.svg" alt="Persons"></span>
-                                                        <p>4 Persons</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listing-location-details">
-                                                <div class="listing-price">
-                                                    <span><i class="feather-map-pin"></i></span> Germany
-                                                </div>
-                                                <div class="listing-price">
-                                                    <h6>$36 <span>/ Day</span></h6>
-                                                </div>
-                                            </div>
-                                            <div class="listing-button">
-                                                <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

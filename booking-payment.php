@@ -110,7 +110,7 @@ include 'include/header-links.php';
                             </div>
                         </div>
                         <div class="back-detail-page">
-                            <a href="listing-details.php"><i class="fa-solid fa-arrow-left me-2"></i> Back to detail page</a>
+                            <a href="car-details.php"><i class="fa-solid fa-arrow-left me-2"></i> Back to detail page</a>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-payment" role="tabpanel" aria-labelledby="pills-payment-tab">

@@ -26,7 +26,7 @@
                 <ul class="main-nav">
                     <li class="active"><a href="index.php">Home</a></li>
                     <li><a href="about-us.php">About Us</a></li>
-                    <li><a href="listing-grid.php">Rent A Car</a></li>
+                    <li><a href="car-listing.php">Rent A Car</a></li>
                     <li><a href="contact-us.php">Contact Us</a></li>
                 </ul>
             </div>

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include 'config/connection.php';
+include 'include/session.php';
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <?php
@@ -144,7 +148,11 @@ include 'include/header-links.php';
             <div class="section-heading" data-aos="fade-down">
                 <h2 class="title text-white">Facts By The Numbers</h2>
             </div>
-
+            <?php
+            $sqlCounts = "SELECT COUNT(driver_id) as driver_count, (SELECT COUNT(booking_id) FROM bookings) as booking_count, (SELECT COUNT(car_id) FROM car_details) as car_count, (SELECT COUNT(owner_id) FROM owners) as owner_count FROM drivers";
+            $resultCounts = $conn->query($sqlCounts);
+            $rowCounts = $resultCounts->fetch_assoc();
+            ?>
             <div class="counter-group">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-12 d-flex" data-aos="fade-down">
@@ -154,7 +162,7 @@ include 'include/header-links.php';
                                     <img src="assets/img/icons/bx-heart.svg" alt>
                                 </div>
                                 <div class="count-content">
-                                    <h4><span class="counterUp">16</span>K+</h4>
+                                    <h4><span class=""><?php echo $rowCounts['driver_count']; ?></span></h4>
                                     <p>Happy Customers</p>
                                 </div>
                             </div>
@@ -167,7 +175,7 @@ include 'include/header-links.php';
                                     <img src="assets/img/icons/orders.png" alt>
                                 </div>
                                 <div class="count-content">
-                                    <h4><span class="counterUp">20</span>K+</h4>
+                                    <h4><span class=""><?php echo $rowCounts['booking_count']; ?></span></h4>
                                     <p>Completed Bookings</p>
                                 </div>
                             </div>
@@ -180,7 +188,7 @@ include 'include/header-links.php';
                                     <img src="assets/img/icons/bx-car.svg" alt>
                                 </div>
                                 <div class="count-content">
-                                    <h4><span class="counterUp">100</span>+</h4>
+                                    <h4><span class=""><?php echo $rowCounts['car_count']; ?></span></h4>
                                     <p>Count of Cars</p>
                                 </div>
                             </div>
@@ -193,7 +201,7 @@ include 'include/header-links.php';
                                     <img src="assets/img/icons/car-owner.png" alt>
                                 </div>
                                 <div class="count-content">
-                                    <h4><span class="counterUp">80</span>+</h4>
+                                    <h4><span class=""><?php echo $rowCounts['owner_count']; ?></span></h4>
                                     <p>Car Owners</p>
                                 </div>
                             </div>
