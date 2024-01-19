@@ -1,7 +1,8 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 include 'config/connection.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Retrieve form data
     $name = $_POST["name"];
@@ -62,7 +63,7 @@ include 'include/header-links.php';
                                 <!-- Full name -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="name">Full Name</label>
+                                        <label class="form-label" for="name">Full Name <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
                                         </div>
@@ -71,7 +72,7 @@ include 'include/header-links.php';
                                 <!-- Email -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="email">Email address</label>
+                                        <label class="form-label" for="email">Email address <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <div class="form-icon form-icon-right">
                                                 <em class="icon ni ni-mail"></em>
@@ -83,7 +84,7 @@ include 'include/header-links.php';
                                 <!-- Contact no. -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="phone">Contact No.</label>
+                                        <label class="form-label" for="phone">Contact No. <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <input type="tel" class="form-control" id="phone" name="phone" placeholder="1234567890" pattern="[0-9]{10,11}" required>
                                         </div>
@@ -92,7 +93,7 @@ include 'include/header-links.php';
                                 <!-- Zip code -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="code">Zipcode</label>
+                                        <label class="form-label" for="code">Zipcode <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="code" name="code" placeholder="Enter your zipcode" pattern="[a-zA-Z0-9\s]{6,7}" required>
                                         </div>
@@ -101,7 +102,7 @@ include 'include/header-links.php';
                                 <!-- Driving License Number -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="dlno">Driving License Number</label>
+                                        <label class="form-label" for="dlno">Driving License Number <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="dlno" name="dlno" placeholder="Enter your driving license number" pattern="[A-Z]{5}[0-9]{6}[A-Z]{2}[0-9]{1}[A-Z]{2}\s[0-9]{2}" required>
                                             <span class="f-12">e.g. FARME100165AB5EW </span>
@@ -111,9 +112,9 @@ include 'include/header-links.php';
                                 <!-- Gender -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="gender">Gender</label>
+                                        <label class="form-label" for="gender">Gender <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
-                                            <ul class="custom-control-group d-flex justify-content-sm-between">
+                                            <ul class="custom-control-group d-flex justify-content-between">
                                                 <li>
                                                     <div class="custom-control custom-radio">
                                                         <input type="radio" class="custom-control-input" name="gender" value="male" id="sex-male" checked required>
@@ -139,7 +140,7 @@ include 'include/header-links.php';
                                 <!-- Address -->
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-label" for="address">Address</label>
+                                        <label class="form-label" for="address">Address <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <textarea class="form-control form-control-sm" id="address" name="address" placeholder="Enter your address here" required></textarea>
                                         </div>
@@ -148,7 +149,7 @@ include 'include/header-links.php';
                                 <!-- Username -->
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-label" for="uname">Username</label>
+                                        <label class="form-label" for="uname">Username <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <div class="form-icon form-icon-right">
                                                 <em class="icon ni ni-user"></em>
@@ -160,7 +161,7 @@ include 'include/header-links.php';
                                 <!-- Password -->
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-label" for="password">Password</label>
+                                        <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                         </div>
@@ -169,7 +170,7 @@ include 'include/header-links.php';
                                 <!-- Confirm Password -->
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-label" for="conpassword">Confirm Password</label>
+                                        <label class="form-label" for="conpassword">Confirm Password <span class="text-danger">*</span></label>
                                         <div class="form-control-wrap">
                                             <input type="password" class="form-control" id="conpassword" name="conpassword" placeholder="Re-enter your password" required title="Both password should match" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                         </div>
@@ -185,7 +186,7 @@ include 'include/header-links.php';
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                                        <button type="submit" name="register" class="btn btn-outline-light w-100 btn-size mt-1">Register</button>
                                     </div>
                                 </div>
                             </div>
@@ -197,33 +198,31 @@ include 'include/header-links.php';
             </div>
         </div>
 
-        <div class="footer-bottom">
+        <footer class="log-footer">
             <div class="container">
                 <div class="copyright">
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                            <div class="copyright-text">
-                                <p class="text-soft">Copyright &copy;
-                                    <script>
+                            <div class="copyright-text nav nam-sm justify-content-center justify-content-lg-start">
+                                <p class="text-soft">Copyright &copy; <script>
                                         document.write(new Date().getFullYear())
-                                    </script> Dreams Rent. All Rights Reserved
-                                </p>
+                                    </script> Dreams Rent. All Rights Reserved.</p>
                             </div>
                         </div>
-                        <div class="col-lg-6 order-lg-last">
+                        <div class="col-md-6 order-lg-last">
                             <ul class="nav nav-sm justify-content-center justify-content-lg-end">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Terms & Condition</a>
+                                    <a class="nav-link terms-policy" href="terms-condition.php" target="_blank">Terms & Condition</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Privacy Policy</a>
+                                    <a class="nav-link terms-policy" href="privacy-policy.php" target="_blank">Privacy Policy</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
     <script src="assets/js/jquery-3.6.4.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
