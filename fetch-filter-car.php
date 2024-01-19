@@ -6,14 +6,10 @@ include 'config/connection.php';
 if (isset($_POST["action"])) {
 
     $query = "SELECT cd.*,cb.brand_id,cb.brand_name FROM car_details as cd LEFT JOIN car_brand as cb ON cb.brand_id = cd.brand_id  WHERE car_name IS NOT NULL";
-//    if (isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"])) {
-//        $query .= "
-//   AND product_price BETWEEN '" . $_POST["minimum_price"] . "' AND '" . $_POST["maximum_price"] . "'
-//  ";
-//    }
+
     if (isset($_POST["brand"])) {
         $brand_filter = implode("','", $_POST["brand"]);
-        $query .= " AND brand_id IN('" . $brand_filter . "')";
+        $query .= " AND cb.brand_id IN('" . $brand_filter . "')";
     }
     if (isset($_POST["category"])) {
         $category_filter = implode("','", $_POST["category"]);
@@ -41,14 +37,14 @@ if (isset($_POST["action"])) {
             $output .= '<div class="col-xl-6 col-lg-6 col-md-6 col-12">
                                 <div class="listing-item">
                                     <div class="listing-img">
-                                        <a href="listing-details.php">
+                                        <a href="car-details.php">
                                             <img src="dashboard/assets/images/car/'.$row['image'].'" class="img-fluid" alt="Toyota">
                                         </a>
                                     </div>
                                     <div class="listing-content">
                                         <div class="listing-features">
                                             <h3 class="listing-title">
-                                                <a href="listing-details.php">'.$row['car_name'].'</a>
+                                                <a href="car-details.php">'.$row['car_name'].'</a>
                                             </h3>
                                             <div class="list-rating">
                                                 <i class="fas fa-star filled"></i>
@@ -96,7 +92,7 @@ if (isset($_POST["action"])) {
                                             </div>
                                         </div>
                                         <div class="listing-button">
-                                            <a href="listing-details.php" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
+                                            <a href="car-details.php?id='.$row['car_id'].'" class="btn btn-order"><span><i class="feather-calendar me-2"></i></span>Rent Now</a>
                                         </div>
                                     </div>
                                 </div>
