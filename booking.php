@@ -19,13 +19,6 @@ include 'include/header-links.php';
                 <div class="row align-items-center text-center">
                     <div class="col-md-12 col-12">
                         <h2 class="breadcrumb-title">Order Confirmation</h2>
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Order Confirmation</li>
-                            </ol>
-                        </nav>
                     </div>
                 </div>
             </div>

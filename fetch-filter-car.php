@@ -63,7 +63,7 @@ if (isset($_POST["action"])) {
                                                 </li>
                                                 <li>
                                                     <span><img src="assets/img/icons/car-parts-02.svg" alt="10 KM"></span>
-                                                    <p>'.$row['mileage'].' KM</p>
+                                                    <p>'.$row['mileage'].' miles</p>
                                                 </li>
                                                 <li>
                                                     <span><img src="assets/img/icons/car-parts-03.svg" alt="Petrol"></span>
